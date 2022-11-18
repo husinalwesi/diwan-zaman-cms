@@ -1,0 +1,135 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">Site content</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                        <!-- <button type="button" (click)="getData()" class="btn btn-secondary"
+                            [translate]="'SHARED.CANCEL'"></button> -->
+                    </div>
+                </div>
+                <!-- {{formattedResponse | json}} -->
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-container mt-3" style="    display: flex;
+                                    flex-direction: column;    margin-top: 3rem !important;">
+                                        <label>{{'Top Banner' | translate}}</label>
+                                        <app-uploader [image_url]="image_url" [isDisabled]="true" [isRequired]="false"
+                                            [isSubmitted]="isSubmitted" accept="image/*" [isTextAppear]="true"
+                                            (selectFileEmiter)="selectFileEmiter($event)">
+                                        </app-uploader>
+                                        <!-- <app-multi-uploader [isTextAppear]="!isViewPage"
+                                            [isSubmitted]="isSubmitted" [isRequired]="isCreatePage"
+                                            accept="image/*" [image_url]="image_url" from_feature="categories"
+                                            [isDisabled]="!isViewPage"
+                                            (selectFileEmiter)="selectFileEmiter($event)"></app-multi-uploader> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-container mt-3" style="    display: flex;
+                                    flex-direction: column;    margin-top: 3rem !important;">
+                                        <label>{{'Middle Banner' | translate}}</label>
+                                        <app-uploader [image_url]="image_url2" [isDisabled]="true" [isRequired]="false"
+                                            [isSubmitted]="isSubmitted" accept="image/*" [isTextAppear]="true"
+                                            (selectFileEmiter)="selectFileEmiter2($event)">
+                                        </app-uploader>
+                                        <!-- <app-multi-uploader [isTextAppear]="!isViewPage"
+                                            [isSubmitted]="isSubmitted" [isRequired]="isCreatePage"
+                                            accept="image/*" [image_url]="image_url" from_feature="categories"
+                                            [isDisabled]="!isViewPage"
+                                            (selectFileEmiter)="selectFileEmiter($event)"></app-multi-uploader> -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-3">
+                                    <div class="example-container">
+                                        <label>{{'Start Time' | translate}}</label>
+                                        <input type="time" [(ngModel)]="startTime" name="startTime" class="form-control"
+                                            required [placeholder]="'SHARED.TITLE' | translate" [ngClass]="{'errorBorder': !startTime && isSubmitted,
+                                        'successBorder': startTime && isSubmitted}" />
+                                        <span class="help-block" *ngIf="!startTime && isSubmitted"
+                                            [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mt-3">
+                                    <div class="example-container">
+                                        <label>{{'End Time' | translate}}</label>
+                                        <input type="time" [(ngModel)]="endTime" name="endTime" class="form-control"
+                                            required [placeholder]="'SHARED.TITLE' | translate" [ngClass]="{'errorBorder': !endTime && isSubmitted,
+                                        'successBorder': endTime && isSubmitted}" />
+                                        <span class="help-block" *ngIf="!endTime && isSubmitted"
+                                            [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-7">
+                                    <div class="example-container">
+                                        <label>{{'Privacy policy (En)' | translate}}</label>
+                                        <quill-editor class="quill-md" [(ngModel)]="privacy_en" name="privacy_en"
+                                            required [placeholder]="'SHARED.INSERT_TEXT_HERE' | translate" [ngClass]="{'errorBorder': !privacy_en && isSubmitted,
+                                        'successBorder': privacy_en && isSubmitted}">
+                                        </quill-editor>
+                                        <span class="help-block" *ngIf="!privacy_en && isSubmitted"
+                                            [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-7">
+                                    <div class="example-container">
+                                        <label>{{'Privacy policy (Ar)' | translate}}</label>
+                                        <quill-editor class="quill-md" [(ngModel)]="privacy_ar" name="privacy_ar"
+                                            required [placeholder]="'SHARED.INSERT_TEXT_HERE' | translate" [ngClass]="{'errorBorder': !privacy_ar && isSubmitted,
+                                        'successBorder': privacy_ar && isSubmitted}">
+                                        </quill-editor>
+                                        <span class="help-block" *ngIf="!privacy_ar && isSubmitted"
+                                            [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-7">
+                                    <div class="example-container">
+                                        <label>{{'Terms & conditions (En)' | translate}}</label>
+                                        <quill-editor class="quill-md" [(ngModel)]="terms_en" name="terms_en" required
+                                            [placeholder]="'SHARED.INSERT_TEXT_HERE' | translate" [ngClass]="{'errorBorder': !terms_en && isSubmitted,
+                                        'successBorder': terms_en && isSubmitted}">
+                                        </quill-editor>
+                                        <span class="help-block" *ngIf="!terms_en && isSubmitted"
+                                            [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-7">
+                                    <div class="example-container">
+                                        <label>{{'Terms & conditions (Ar)' | translate}}</label>
+                                        <quill-editor class="quill-md" [(ngModel)]="terms_ar" name="terms_ar" required
+                                            [placeholder]="'SHARED.INSERT_TEXT_HERE' | translate" [ngClass]="{'errorBorder': !terms_ar && isSubmitted,
+                                        'successBorder': terms_ar && isSubmitted}">
+                                        </quill-editor>
+                                        <span class="help-block" *ngIf="!terms_ar && isSubmitted"
+                                            [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <!-- <div class="row" [class.hidden]="pageType =='terms_conditions' || pageType =='privacy_policy'">
+                                <div class="col-md-12 mt-4">
+                                    <div class="example-container">
+                                        <label [translate]="'SHARED.IMAGE'"></label>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <app-uploader [isTextAppear]="true" [isSubmitted]="isSubmitted" [isRequired]="false" accept=".jpeg, .jpg, .webp, .png, .svg, .gif" [image_url]="item.img" from_feature="blog" [isDisabled]="true" (selectFileEmiter)="selectFileEmiter($event,item)"></app-uploader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

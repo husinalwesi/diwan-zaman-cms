@@ -1,0 +1,17 @@
+.select-td{
+    padding-top: 15px;
+    display: flex;
+    & > div{
+        width: 275px;
+        & button{
+            min-width: 80px;
+        }
+    }
+}
+th{
+    white-space: nowrap;
+}
+.table thead th,
+.table thead td {
+    width: 50%;
+}

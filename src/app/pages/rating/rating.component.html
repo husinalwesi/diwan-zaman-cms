@@ -1,0 +1,60 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Rating' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-with-image table-cut-text">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'Name Of Author' | translate}}</th>
+                                            <th>{{'Rating' | translate}}</th>
+                                            <th>{{'Review' | translate}}</th>
+                                            <th>{{'Images' | translate}}</th>
+                                            <th>{{'Order Number' | translate}}</th>
+                                            <th class="w-20" [translate]="'SHARED.ACTION'"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response">
+                                            <td><span [ngbTooltip]="iteration.nameOfAuther" class="capitalize td-cut-text" [innerHtml]="iteration.nameOfAuther"></span></td>
+                                            <td>
+                                                <span *ngFor="let item of iteration.rating"><i class="fa fa-star"></i></span>
+                                            </td>
+                                            <td><span [ngbTooltip]="iteration.review" class="capitalize td-cut-text" [innerHtml]="iteration.review"></span></td>
+                                            <td class="img-on-table"><img [src]="iteration.image" viewFullImage [ngbTooltip]="'SHARED.CLICK_TO_ENLARGE_IMAGE' | translate" /></td>
+                                            <td><span [ngbTooltip]="iteration.orderNumber" class="capitalize td-cut-text" [innerHtml]="iteration.orderNumber"></span></td>
+                                            <td>
+                                                <a (click)="deleteRating(iteration.id)" class="action-box-delete decline" href="javascript:void(0);" [ngbTooltip]="'SHARED.DELETE' | translate"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

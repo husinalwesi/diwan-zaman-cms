@@ -1,0 +1,86 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label" *ngIf="isCreatePage">{{'Create Discount' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isEditPage">{{'Update Discount' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isViewPage">{{'View Discount' | translate}}</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <button *ngIf="isEditPage || isCreatePage" type="button" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'" (click)="submitForm(form)"></button>
+                        <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                        <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row m-0">
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Set All' | translate}}</label>
+                                                <select name="set_all" [(ngModel)]="set_all" class="form-control" required>
+                                                    <!-- [ngClass]="{'errorBorder': set_all == '0' && isSubmitted,
+                                                'successBorder': set_all != '0' && isSubmitted}" -->
+                                                    <option *ngFor="let item of set_allList" [value]="item.id">{{item.value}}</option>
+                                                </select>
+                                                <!-- <span class="help-block" *ngIf="set_all == '0' && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Type' | translate}}</label>
+                                                <select name="type" [(ngModel)]="type" class="form-control" required (change)="typeChange()"
+                                                [ngClass]="{'errorBorder': type == '0' && isSubmitted,
+                                                'successBorder': type != '0' && isSubmitted}">
+                                                    <option value="0">{{'-- Select one --' | translate}}</option>
+                                                    <option *ngFor="let item of typeList" [value]="item.id">{{item.value}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="type == '0' && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Percentage' | translate}}</label>
+                                                <input type="number" min="0" name="percentage" [(ngModel)]="percentage" class="form-control" required
+                                                [placeholder]="'Percentage' | translate"
+                                                [ngClass]="{'errorBorder': (!form.controls.percentage?.valid || !checkValue(percentage)) && isSubmitted,
+                                                'successBorder': form.controls.percentage?.valid && isSubmitted}"
+                                                />
+                                                <span class="help-block" *ngIf="!form.controls.percentage?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                                <span class="help-block" *ngIf="!checkValue(percentage) && isSubmitted" >** {{'Value must be positive' | translate}}</span>
+                                            </div>
+                                        </div>
+                                        <div [class.hidden-field]="set_all == '1'" class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Discountable ID#' | translate}}</label>
+                                                <select name="discountable_id" [(ngModel)]="discountable_id" class="form-control" required
+                                                [ngClass]="{'errorBorder': discountable_id == '0' && isSubmitted,
+                                                'successBorder': discountable_id != '0' && isSubmitted}">
+                                                    <option value="0">{{'-- Select one --' | translate}}</option>
+                                                    <option *ngFor="let item of discountable_idList" [value]="item.id">{{item.value}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="discountable_id == '0' && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label class="d-block">{{'Expiry Date' | translate}}</label>
+                                                <input name="expiry_date" [(ngModel)]="expiry_date" [owlDateTime]="dt1" class="form-control" [owlDateTimeTrigger]="dt1" [placeholder]="'Date Time' | translate" />
+                                                <owl-date-time #dt1></owl-date-time>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

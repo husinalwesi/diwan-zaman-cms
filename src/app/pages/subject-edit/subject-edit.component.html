@@ -1,0 +1,63 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label" *ngIf="isCreatePage">{{'Create Subject' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isEditPage">{{'Udate Subject' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isViewPage">{{'View Subject' | translate}}</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <button *ngIf="isEditPage || isCreatePage" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                        <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                        <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">{{'Subject (En)' | translate}}</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <input type="text" name="subjectEn" [(ngModel)]="subjectEn" class="form-control" required
+                                        [placeholder]="'Subject (En)' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.subjectEn?.valid && isSubmitted,
+                                        'successBorder': form.controls.subjectEn?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.subjectEn?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">{{'Subject (Ar)' | translate}}</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <input type="text" name="subjectAr" [(ngModel)]="subjectAr" class="form-control" required
+                                        [placeholder]="'Subject (AR)' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.subjectAr?.valid && isSubmitted,
+                                        'successBorder': form.controls.subjectAr?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.subjectAr?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">{{'Type' | translate}}</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group input-group-lg input-group-solid"
+                                    [ngClass]="{'errorBorder': (!form.controls.type?.valid || form.controls.type?.value == '-1') && isSubmitted,
+                                    'successBorder': form.controls.type?.valid && isSubmitted && form.controls.type?.value != '-1'}"
+                                    >
+                                        <select [disabled]="isViewPage" name="type" [(ngModel)]="type" required class="form-control form-control-lg form-control-solid">
+                                            <option value="-1" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                                            <option *ngFor="let item of typeList" [value]="item.id">{{item.name}}</option>
+                                        </select>
+                                    </div>
+                                    <span class="help-block" *ngIf="(!form.controls.type?.valid || form.controls.type?.value == '-1') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,61 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Time Slots' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                        <a *ngIf="!isViewPage" routerLink="/time-slot-create/{{id}}/{{type}}" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                            <i class="flaticon2-plus-1"></i>
+                            <span [translate]="'SHARED.CREATE'"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-cut-text">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'Day' | translate}}</th>
+                                            <th>{{'From' | translate}}</th>
+                                            <th>{{'To' | translate}}</th>
+                                            <th>{{'Brand' | translate}}</th>
+                                            <th>{{'Created At' | translate}}</th>
+                                            <th *ngIf="!isViewPage" class="w-20" [translate]="'SHARED.ACTION'"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response">
+                                            <td><span [ngbTooltip]="iteration.day" class="capitalize td-cut-text" [innerHtml]="iteration.day"></span></td>
+                                            <td><span [ngbTooltip]="iteration.from" class="capitalize td-cut-text" [innerHtml]="iteration.from"></span></td>
+                                            <td><span [ngbTooltip]="iteration.to" class="capitalize td-cut-text" [innerHtml]="iteration.to"></span></td>
+                                            <td><span [ngbTooltip]="iteration.status" class="capitalize td-cut-text" [innerHtml]="iteration.status"></span></td> 
+                                            <td><span [ngbTooltip]="iteration.created_at" class="capitalize td-cut-text">{{iteration.created_at |date}}</span></td> 
+                                            <td *ngIf="!isViewPage">
+                                                <a (click)="deleteTimeSlot(iteration.id)" class="action-box-delete" href="javascript:void(0);" [ngbTooltip]="'SHARED.DELETE' | translate"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="response.length == 0"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div> -->

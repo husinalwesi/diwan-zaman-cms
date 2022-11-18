@@ -1,0 +1,78 @@
+<form #form="ngForm" novalidate>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">{{'Order Details' | translate}}
+
+                            ({{getTotalItemsCounter()}} Items) ({{getTotalItemsAmount()}} JD)
+                        </h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <!-- <button *ngIf="isEditPage || isCreatePage" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button> -->
+                        <!-- <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button> -->
+                        <button type="button" (click)="backPage()" class="btn btn-light"
+                            [translate]="'SHARED.BACK'"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row m-0 mt-5">
+                                <label class="mb-2">{{'Cart Items' | translate}}</label>
+                                <div class="table-responsive">
+                                    <table
+                                        class="table table-bordered table-striped table-hover m-0 text-center table-cut-text table-with-image">
+                                        <thead>
+                                            <tr>
+                                                <th>{{'Name' | translate}}</th>
+                                                <th>{{'Image' | translate}}</th>
+                                                <th>{{'Unit Price' | translate}}</th>
+                                                <th>{{'Quantity' | translate}}</th>
+                                                <th>{{'Total' | translate}}</th>
+                                                <th>{{'Notes' | translate}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let iteration of response?.productsJSON">
+                                                <td><span
+                                                        [ngbTooltip]="iteration.data.title_en + ' | ' + iteration.data.title_ar"
+                                                        class="capitalize td-cut-text"
+                                                        [innerHtml]="iteration.data.title_en + ' | ' + iteration.data.title_ar"></span>
+                                                </td>
+                                                <td class="img-on-table"><img [src]="iteration.data.image || defaultImg"
+                                                        viewFullImage
+                                                        [ngbTooltip]="'SHARED.CLICK_TO_ENLARGE_IMAGE' | translate" />
+                                                </td>
+                                                <td><span
+                                                        [ngbTooltip]="(iteration.selection ? iteration.selection.price : iteration.data.price) + ' JD'"
+                                                        class="capitalize td-cut-text"
+                                                        [innerHtml]="(iteration.selection ? iteration.selection.price : iteration.data.price) + ' JD'"></span>
+                                                </td>
+                                                <td><span [ngbTooltip]="iteration.counter.value"
+                                                        class="capitalize td-cut-text"
+                                                        [innerHtml]="iteration.counter.value"></span></td>
+
+
+                                                <td><span
+                                                        [ngbTooltip]="(iteration.counter.value * (iteration.selection ? iteration.selection.price : iteration.data.price)) + ' JD'"
+                                                        class="capitalize td-cut-text"
+                                                        [innerHtml]="(iteration.counter.value * (iteration.selection ? iteration.selection.price : iteration.data.price)) + ' JD'"></span>
+                                                </td>
+                                                <td><span [ngbTooltip]="iteration.notes || '---'"
+                                                        class="capitalize td-cut-text"
+                                                        [innerHtml]="iteration.notes || '---'"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

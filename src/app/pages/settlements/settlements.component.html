@@ -1,0 +1,115 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Settlements' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <a *ngIf="response?.length > 0" class="btn btn-success excel-btn" href="javascript:void(0);" (click)="exportToExcel()"><i class="far fa-file-excel"></i> {{'Export To Excel' | translate}}</a>
+                    <a *ngIf="checkedlist.length > 0" class="btn btn-success" href="javascript:void(0);" (click)="updateAllAsPaid()">{{'Update All As Paid' | translate}}</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="row">
+                        <div class="col-md-1 mb-3">
+                            <label class="invisible">[INVISIBLE]</label>
+                            <span class="filterBy text-muted" [translate]="'SHARED.FILTER_BY'"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>{{'Payment Status' | translate}}</label>
+                                <select name="paymentStatus" [(ngModel)]="paymentStatus" class="form-control" (change)="filterBy()">
+                                    <option *ngFor="let item of paymentStatusList" [value]="item.id">{{item.value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <date-range-picker style="direction: ltr !important;" (datepickerReset)="datepickerReset($event)" (rangeSelected)="onRangeSelected($event)" [options]="options"></date-range-picker>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>{{'Type' | translate}}</label>
+                                <select name="type" [(ngModel)]="type" class="form-control" (change)="typeChange()">
+                                    <option value="0">{{'-- Select one --' | translate}}</option>
+                                    <option *ngFor="let item of typeList" [value]="item.id">{{item.value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>{{'Type ID' | translate}}</label>
+                                <select name="discountable_id" [(ngModel)]="discountable_id" class="form-control" (change)="filterBy()">
+                                    <option value="0">{{'-- Select one --' | translate}}</option>
+                                    <option *ngFor="let item of discountable_idList" [value]="item.id">{{item.value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-2">
+                            <label class="invisible">[INVISIBLE]</label>
+                            <button class="btn btn-success btn-block" (click)="currentPage=1; getData()" [translate]="'SHARED.SUBMIT'"></button>
+                        </div> -->
+                    </div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-cut-text table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th>ID</th> -->
+                                            <!-- <th style="width: 50px;"></th> -->
+                                            <th>{{'Order ID' | translate}}</th>
+                                            <th>{{'Commission amount' | translate}}</th>
+                                            <th>{{'Seller' | translate}}</th>
+                                            <th>{{'Payment method' | translate}}</th>
+                                            <th [permission]="'settlements-status'">{{'Status' | translate}}</th>
+                                            <th>{{'Purchase date' | translate}}</th>
+                                            <th [permission]="'settlements-status'" style="width: 170px;" [translate]="'SHARED.ACTION'"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response">
+                                            <!-- <td>
+                                                <input *ngIf="iteration.status != '1'" type="checkbox" (change)="toggleCheckList(iteration)" [checked]="checkIfExist(iteration)" >
+                                            </td> -->
+                                            <!-- <td><span [ngbTooltip]="iteration.id" class="capitalize td-cut-text" [innerHtml]="iteration.id"></span></td> -->
+                                            <td><a routerLink="/orders/details/{{iteration.order}}" [ngbTooltip]="iteration.order" class="capitalize td-cut-text" [innerHtml]="iteration.order"></a></td>
+                                            <td><span [ngbTooltip]="iteration.commission_amount" class="capitalize td-cut-text" [innerHtml]="iteration.commission_amount"></span></td>
+                                            <td><span [ngbTooltip]="iteration.seller" class="capitalize td-cut-text" [innerHtml]="iteration.seller"></span></td>
+                                            <td><span [ngbTooltip]="iteration.payment_method" class="capitalize td-cut-text" [innerHtml]="iteration.payment_method"></span></td>
+                                            <td [permission]="'settlements-status'"><span [ngbTooltip]="iteration.status == '1' ? ('Paid' | translate) : ('Not Paid' | translate)" class="capitalize td-cut-text">
+                                                <span
+                                                [class.paid]="iteration.status == '1'"
+                                                [class.not-paid]="iteration.status != '1'"
+                                                [translate]="iteration.status == '1' ? 'Paid' : 'Not Paid'"
+                                                ></span>
+                                            </span></td>
+                                            <td><span [ngbTooltip]="iteration.purchase_date | date" class="capitalize td-cut-text" [innerHtml]="iteration.purchase_date | date"></span></td>
+                                            <td [permission]="'settlements-status'" style="padding-top: 15px;">
+                                                <a *ngIf="iteration.status == '0'" style="padding: 5px 15px;" class="btn btn-success" href="javascript:void(0);" (click)="updateAsPaid(iteration.id)"
+                                                [attr.disabled]="checkedlist.length > 0"
+                                                [class.disabled]="checkedlist.length > 0"
+                                                >{{'Update As Paid' | translate}}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

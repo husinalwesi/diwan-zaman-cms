@@ -1,0 +1,21 @@
+ul{
+    list-style: auto;
+    padding: 0 0 0 15px;
+    & a{
+        opacity: 0;
+        transition: all 0.3s;
+        margin: 0 0 0 5px;
+        & i.fa-edit{
+            color: #2c5a81;
+        }
+        & i.fa-trash{
+            color: #ff6f7e;
+        }
+    }
+    & li:hover{
+        & a{
+            opacity: 1;
+            transition: all 0.3s;
+        }
+    }
+}

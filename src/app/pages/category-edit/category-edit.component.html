@@ -1,0 +1,84 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label" *ngIf="isCreatePage" [translate]="'SHARED.CREATE_CATEGORY'"></h3>
+                        <h3 class="card-label" *ngIf="isEditPage" [translate]="'SHARED.UPDATE_CATEGORY'"></h3>
+                        <h3 class="card-label" *ngIf="isViewPage" [translate]="'SHARED.VIEW_CATEGORY'"></h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <button *ngIf="isEditPage || isCreatePage" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                        <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                        <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-container">
+                                        <label [translate]="'Category (EN)'"></label>
+                                        <input type="text" name="title" [(ngModel)]="title" class="form-control" required
+                                        [placeholder]="'Category (EN)' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.title?.valid && isSubmitted,
+                                        'successBorder': form.controls.title?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.title?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-container">
+                                        <label>{{'Category (Ar)' | translate}}</label>
+                                        <input type="text" name="title_ar" [(ngModel)]="title_ar" class="form-control" required
+                                        [placeholder]="'Category (AR)' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.title_ar?.valid && isSubmitted,
+                                        'successBorder': form.controls.title_ar?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.title_ar?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4">
+                                    <div class="example-container">
+                                        <label>{{'Category' | translate}}</label>
+                                        <select name="category" [(ngModel)]="category" class="form-control" (change)="mainCategoryChange($event)">
+                                            <option *ngFor="let item of categoryList" [value]="item.id">{{item.value}}</option>
+                                        </select>
+                                        <span class="help-block text-muted">** {{'Keep it empty to make the main category.' | translate}}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-5">
+                                    <div class="example-container">
+                                        <app-uploader
+                                        [image_url]="image_url"
+                                        [isDisabled]="true"
+                                        [isRequired]="isCreatePage"
+                                        [isSubmitted]="isSubmitted"
+                                        accept="image/*"
+                                        [isTextAppear]="true"
+                                        (selectFileEmiter)="selectFileEmiter($event)"
+                                        ></app-uploader>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-md-8" *ngIf="subCategoryList.length > 0">
+                                    <div class="example-container">
+                                        <label>{{'Sub Category' | translate}} <span class="cursor-pointer" [ngbTooltip]="'Refresh The sub category data' | translate" (click)="mainCategoryChange()"><i class="fas fa-redo"></i></span></label>
+                                        <ul>
+                                            <li *ngFor="let item of subCategoryList">
+                                                <span>{{item.value}}</span>
+                                                <a [ngbTooltip]="'SHARED.EDIT' | translate" href="/category-edit/{{item.id}}" target="_blank"><i class="fa fa-edit"></i></a>
+                                                <a [ngbTooltip]="'SHARED.DELETE' | translate" (click)="deleteCategory(item.id)" href="javascript:void(0);"><i class="fa fa-trash"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

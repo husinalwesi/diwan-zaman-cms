@@ -1,0 +1,112 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label" *ngIf="isCreatePage">{{'Create Banner' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isEditPage">{{'Update Banner' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isViewPage">{{'View Banner' | translate}}</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <button *ngIf="isEditPage || isCreatePage" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                        <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                        <button *ngIf="isViewPage" type="button" (click)="backPage()" class="btn btn-secondary" [translate]="'SHARED.BACK'"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row">
+                                <div class="col-md-6 mb-7">
+                                    <div class="example-container">
+                                        <label>{{'Title' | translate}}</label>
+                                        <input type="text" minlength="3" maxlength="50" name="title" [(ngModel)]="title" class="form-control" required
+                                        [placeholder]="'Title' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.title?.valid && isSubmitted,
+                                        'successBorder': form.controls.title?.valid && isSubmitted}"
+                                        [disabled]="isViewPage"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.title?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-7">
+                                    <div class="example-container">
+                                        <label>{{'Type' | translate}}</label>
+                                        <select name="type" [(ngModel)]="type" class="form-control" required
+                                        [ngClass]="{'errorBorder': (!form.controls.type?.valid || type == '0') && isSubmitted,
+                                        'successBorder': (!form.controls.type?.valid && type != '0') && isSubmitted}"
+                                        [disabled]="isViewPage"
+                                        (change)="changeType()"
+                                        >
+                                            <!-- <option value="0">{{'-- Select an option --' | translate}}</option> -->
+                                            <option value="1">{{'Item' | translate}}</option>                                            
+                                            <option value="5">{{'Shop' | translate}}</option>
+                                            <!-- <option *ngFor="let item of itemList" [value]="item.id" [innerHtml]="item.value"></option>                                             -->
+                                            <!-- <option *ngFor="let item of itemList" [value]="item.id" [innerHtml]="item.value"></option> -->
+                                        </select>
+                                        <span class="help-block" *ngIf="(!form.controls.type?.valid || type == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>                                
+                                <div class="col-md-6 mb-7" *ngIf="type == '1'">
+                                    <div class="example-container">
+                                        <label>{{'Item' | translate}}</label>
+                                        <select name="item_id" [(ngModel)]="item_id" class="form-control" required
+                                        [ngClass]="{'errorBorder': (!form.controls.item_id?.valid || item_id == '0') && isSubmitted,
+                                        'successBorder': (!form.controls.item_id?.valid && item_id != '0') && isSubmitted}"
+                                        [disabled]="isViewPage"
+                                        >
+                                            <option value="0">{{'-- Select an option --' | translate}}</option>
+                                            <option *ngFor="let item of itemList" [value]="item.id" [innerHtml]="item.value"></option>
+                                        </select>
+                                        <span class="help-block" *ngIf="(!form.controls.item_id?.valid || item_id == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-7" *ngIf="type == '5'">
+                                    <div class="example-container">
+                                        <label>{{'Shop' | translate}}</label>
+                                        <select name="shop" [(ngModel)]="shop" class="form-control" required
+                                        [ngClass]="{'errorBorder': (!form.controls.shop?.valid || shop == '0') && isSubmitted,
+                                        'successBorder': (!form.controls.shop?.valid && shop != '0') && isSubmitted}"
+                                        [disabled]="isViewPage"
+                                        >
+                                            <option value="0">{{'-- Select an option --' | translate}}</option>
+                                            <option *ngFor="let item of shopList" [value]="item.id" [innerHtml]="item.value"></option>
+                                        </select>
+                                        <span class="help-block" *ngIf="(!form.controls.shop?.valid || shop == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>                                
+                                <div class="col-md-6 mb-7">
+                                    <div class="example-container">
+                                        <label>{{'Position' | translate}}</label>
+                                        <select name="position" [(ngModel)]="position" class="form-control" required
+                                        [ngClass]="{'errorBorder': (!form.controls.position?.valid || position == '0') && isSubmitted,
+                                        'successBorder': (!form.controls.position?.valid && position != '0') && isSubmitted}"
+                                        [disabled]="isViewPage"
+                                        >
+                                            <option value="0">{{'-- Select an option --' | translate}}</option>
+                                            <option *ngFor="let item of positionList" [value]="item.id" [innerHtml]="item.value"></option>
+                                        </select>
+                                        <span class="help-block" *ngIf="(!form.controls.position?.valid || position == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-container">
+                                        <label [translate]="'SHARED.IMAGE'"></label>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <app-uploader [isTextAppear]="!isViewPage" [isSubmitted]="isSubmitted" [isRequired]="isCreatePage" accept=".png, .jpg, .jpeg" [image_url]="image_url" from_feature="categories" [isDisabled]="!isViewPage" (selectFileEmiter)="selectFileEmiter($event)"></app-uploader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

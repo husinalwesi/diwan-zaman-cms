@@ -1,0 +1,125 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Orders' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                        <!-- [class.disabled]="totalResult >= 6" -->
+                        <!-- <a *ngIf="!isDeletedPage" routerLink="/category-create" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                            <i class="flaticon2-plus-1"></i>
+                            <span [translate]="'SHARED.CREATE'"></span>
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <!-- <div class="row">
+                        <div class="col-md-1 mb-3">
+                            <label class="invisible">[INVISIBLE]</label>
+                            <span class="filterBy text-muted" [translate]="'SHARED.FILTER_BY'"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label [translate]="'SHARED.SEARCH'"></label>
+                                <input type="text" name="search" [(ngModel)]="search" class="form-control"
+                                    [placeholder]="'SHARED.SEARCH' | translate" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="invisible">[INVISIBLE]</label>
+                            <button class="btn btn-success btn-block" (click)="currentPage=1; getData()"
+                                [translate]="'SHARED.SUBMIT'"></button>
+                        </div>
+                    </div> -->
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table
+                                    class="table table-bordered table-striped table-hover m-0 text-center table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'Customer Name' | translate}}</th>
+                                            <th>{{'Customer Phone 1' | translate}}</th>
+                                            <th>{{'Customer Phone 2' | translate}}</th>
+                                            <th>{{'Customer Address' | translate}}</th>
+                                            <th>{{'Order ID#' | translate}}</th>
+                                            <th>Delivery method</th>
+                                            <th>Date/Time</th>
+                                            <th>{{'Status' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response; let i = index">
+                                            <!-- <td><a routerLink="/admin-view/{{iteration.customerID}}" [ngbTooltip]="iteration.customerName" class="capitalize td-cut-text" [innerHtml]="iteration.customerName"></a></td> -->
+                                            <td><span [ngbTooltip]="iteration.customer_fullName"
+                                                    class="capitalize td-cut-text"
+                                                    [innerHtml]="iteration.customer_fullName"></span></td>
+                                            <td><a [href]="'tel:' + getPhone(iteration.customer_phone)"
+                                                    [ngbTooltip]="getPhone(iteration.customer_phone)"
+                                                    class="capitalize td-cut-text"
+                                                    [innerHtml]="getPhone(iteration.customer_phone)"></a></td>
+                                            <td><a [href]="'tel:' + getPhone(iteration.customer_phone2)"
+                                                    [ngbTooltip]="getPhone(iteration.customer_phone2)"
+                                                    class="capitalize td-cut-text"
+                                                    [innerHtml]="getPhone(iteration.customer_phone2)"></a></td>
+                                            <td><span [ngbTooltip]="iteration.customer_address"
+                                                    class="capitalize td-cut-text"
+                                                    [innerHtml]="iteration.customer_address"></span></td>
+
+                                            <td><a routerLink="/orders/details/{{iteration.id}}"
+                                                    [ngbTooltip]="iteration.id" class="capitalize td-cut-text"
+                                                    [innerHtml]="iteration.id"></a></td>
+
+
+                                            <td><span [ngbTooltip]="iteration.deliveryMethod"
+                                                    class="capitalize td-cut-text"
+                                                    [innerHtml]="iteration.deliveryMethod"></span></td>
+
+                                            <td><span *ngIf="iteration.created_at" [ngbTooltip]="iteration.created_at"
+                                                    class="capitalize td-cut-text">
+                                                    {{getDateTime(iteration.created_at)}}
+                                                </span></td>
+                                            <td class="select-td">
+                                                <select class="form-control w-100" name="status-{{iteration.orderID}}"
+                                                    [ngModel]="iteration.status"
+                                                    (change)="changeOrderStatus($event,iteration.id,i)"
+                                                    style="min-width: 130px;margin: 0 auto;">
+                                                    <option *ngFor="let item of orderStatusList; let innerIndex = index"
+                                                        [value]="item.id">{{item.value}}</option>
+                                                    <!-- [disabled]="!innerIndex" -->
+                                                </select>
+                                            </td>
+
+                                            <!-- <td><span [ngbTooltip]="iteration.paymentMethod" class="capitalize td-cut-text" [innerHtml]="iteration.paymentMethod"></span></td>
+                                            <td><span [ngbTooltip]="iteration.city" class="capitalize td-cut-text" [innerHtml]="iteration.city"></span></td>
+                                            <td class="img-on-table"><img [src]="iteration.location" viewFullImage [ngbTooltip]="'SHARED.CLICK_TO_ENLARGE_IMAGE' | translate" /></td>
+                                            <td><span [ngbTooltip]="iteration.items" class="capitalize td-cut-text" [innerHtml]="iteration.items"></span></td>
+                                            <td><span [ngbTooltip]="iteration.servicesPurchased" class="capitalize td-cut-text" [innerHtml]="iteration.servicesPurchased"></span></td> -->
+
+                                            <!-- <td><span [ngbTooltip]="iteration.totalAmount"
+                                                    class="capitalize td-cut-text"
+                                                    [innerHtml]="iteration.totalAmount"></span></td> -->
+                                            <!-- <td><span [ngbTooltip]="iteration.detailedReceipt" class="capitalize td-cut-text" [innerHtml]="iteration.detailedReceipt"></span></td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="response.length == 0"></app-table-empty>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div> -->

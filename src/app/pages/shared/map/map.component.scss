@@ -1,0 +1,22 @@
+.map{
+    & .auto-complete-search{
+        width: 75% !important;
+        z-index: 10;    
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+    }
+    & .map-details{
+        background-color: #ebe9e461;
+        padding: 5px 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        font-size: 12px;
+        opacity: 0.6;
+        transition: all 0.3s;
+    }
+    &:hover .map-details{
+        opacity: 1.0;
+        transition: all 0.3s;            
+    }
+}

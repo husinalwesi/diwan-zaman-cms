@@ -1,0 +1,117 @@
+<div class="row" *ngIf="!isDeletedPage">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b">
+            <div class="card-header">
+              <div class="card-title">
+                  <h3 class="hide-main card-label" [translate]="'SHARED.ADVANCE_SEARCH'"></h3>
+              </div>
+              <div class="card-toolbar">
+                  <div class="example-tools justify-content-center">
+                      <a [permission]="'banner-create'" *ngIf="!isDeletedPage" routerLink="/banner-create" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                          <i class="flaticon2-plus-1"></i>
+                          <span [translate]="'SHARED.CREATE'"></span>
+                      </a>
+                      <span type="button" [ngbTooltip]="'SHARED.TOGGLE' | translate" (click)="isToggle = !isToggle" class="hide-main example-copy toolbar-button btn btn-default font-weight-500" [innerHtml]="isToggle ? '-' : '+'"></span>
+                  </div>
+              </div>
+          </div>
+          <div class="card-body" *ngIf="isToggle">
+            <form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+                <div class="row">
+                    <div class="col-md-1 pd-top-special">
+                        <span class="text-muted" [translate]="'SHARED.FILTER_BY'"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label [translate]="'SHARED.SEARCH'"></label>
+                            <input type="text" name="search" [(ngModel)]="search" class="form-control" [placeholder]="'SHARED.SEARCH' | translate"/>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-2">
+                      <div class="form-group">
+                        <label [translate]="'SHARED.STATUS'"></label>
+                        <select name="status" [(ngModel)]="status" class="form-control">
+                            <option value="all" [translate]="'SHARED.ALL'"></option>
+                            <option value="1" [translate]="'SHARED.ACTIVE'"></option>
+                            <option value="2" [translate]="'SHARED.INACTIVE'"></option>
+                        </select>
+                      </div>
+                    </div> -->
+                    <!-- <div class="col-md-2">
+                      <div class="form-group">
+                        <label [translate]="'SHARED.GENDER'"></label>
+                        <select name="gender" [(ngModel)]="gender" class="form-control">
+                            <option value="all" [translate]="'SHARED.ALL'"></option>
+                            <option value="2" [translate]="'SHARED.MALE'"></option>
+                            <option value="1" [translate]="'SHARED.FEMALE'"></option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label [translate]="'SHARED.SORT_BY'"></label>
+                            <select name="sort_by" [(ngModel)]="sort_by" class="form-control">
+                                <option value="all" [translate]="'SHARED.ALL'"></option>
+                                <option value="sortByJoin" [translate]="'SHARED.JOINING_DATE'"></option>
+                                <option value="sortByDOB" [translate]="'SHARED.BIRTHDAY_DATE'"></option>
+                            </select>
+                        </div>
+                    </div> -->
+                    <div class="col-md-2">
+                      <label class="invisible">[INVISIBLE]</label>
+                      <button type="submit" class="btn btn-block btn-success" [translate]="'SHARED.SUBMIT'"></button>
+                    </div>
+                </div>
+              </form>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-8">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Banners' | translate}}</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container pb-5">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-cut-text table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <!-- <th style="width: 10%;">Number</th> -->
+                                            <th>{{'Title' | translate}}</th>
+                                            <th>{{'Item' | translate}}</th>
+                                            <th>{{'Image' | translate}}</th>
+                                            <th>{{'Actions' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response;let i = index">
+                                            <td><span [innerHtml]="iteration.name"></span></td>
+                                            <td [innerHtml]="iteration.type"></td>
+                                            <td class="img-on-table"><img [src]="iteration.image" viewFullImage [ngbTooltip]="'SHARED.CLICK_TO_ENLARGE_IMAGE' | translate" /></td>
+                                            <td>
+                                                <a [permission]="'banner-edit'" *ngIf="!isDeletedPage" class="action-box-edit" routerLink="/banner-edit/{{iteration.id}}" [ngbTooltip]="'SHARED.EDIT' | translate"><i class="fa fa-edit"></i></a>
+                                                <a [permission]="'banner-delete'" *ngIf="!isDeletedPage" class="action-box-delete" href="javascript:void(0);" (click)="delete(iteration.id)" [ngbTooltip]="'SHARED.DELETE' | translate"><i class="fa fa-trash"></i></a>
+                                                <a *ngIf="isDeletedPage" class="action-box-delete" href="javascript:void(0);" (click)="unDelete(iteration.id)" [ngbTooltip]="'Restore' | translate"><i class="fa fa-undo"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!response.length"></app-table-empty>
+                            <app-pagination-bar *ngIf="response.length" class="mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+                            (selectPage)="selectPage($event)">
+                            </app-pagination-bar>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

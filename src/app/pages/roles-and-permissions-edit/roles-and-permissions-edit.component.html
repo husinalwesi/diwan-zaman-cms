@@ -1,0 +1,58 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label" *ngIf="isCreatePage">{{'Create Role & Permissions' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isEditPage">{{'Update Role & Permissions' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isViewPage">{{'View Role & Permissions' | translate}}</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <button *ngIf="isEditPage || isCreatePage" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                        <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                        <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="example-container mt-3">
+                                        <label>{{'Role name' | translate}}</label>
+                                        <input type="text" name="title" [(ngModel)]="title" class="form-control" required
+                                        [placeholder]="'Role name' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.title?.valid && isSubmitted,
+                                        'successBorder': form.controls.title?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.title?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-7">
+                                    <div class="example-container">
+                                    <label>{{'Permissions' | translate}}</label>
+                                        <!--  -->
+                                        <div class="row m-0">
+                                            <div class="col-md-4" *ngFor="let item of permissionList">
+                                                <label class="checkbox-container">
+                                                    <label class="capetalize">{{item.title | removeDashs}}</label>
+                                                    <input type="checkbox" [checked]="item.isChecked" (change)="changeCheckBox(item)" />
+                                                    <span class="checkmark"
+                                                    [ngClass]="{'errorBorder': !checkIfAtLeastOneIsSelected() && isSubmitted,
+                                                    'successBorder': checkIfAtLeastOneIsSelected() && isSubmitted}"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <span class="help-block" *ngIf="!checkIfAtLeastOneIsSelected() && isSubmitted" [translate]="'SHARED.ATLEAST_CHOOSE_ONE'"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

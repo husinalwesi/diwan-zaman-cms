@@ -1,0 +1,415 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label" *ngIf="isCreatePage">{{'Create Item For Sale' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isEditPage">{{'Update Item For Sale' | translate}}</h3>
+                        <h3 class="card-label" *ngIf="isViewPage">{{'View Item For Sale' | translate}}</h3>
+                    </div>
+                    <!-- <div class="card-toolbar">
+                        <button *ngIf="isEditPage || isCreatePage" type="button" class="btn btn-success mr-2"
+                            [translate]="'SHARED.SAVE_CHANGES'" (click)="submitForm(form)"></button>
+                        <button *ngIf="isEditPage" type="button" (click)="cancelChanges()"
+                            class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                        <button type="button" (click)="backPage()" class="btn btn-light"
+                            [translate]="'SHARED.BACK'"></button>
+                    </div> -->
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row m-0">
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Title (En)' | translate}}</label>
+                                                <input type="text" name="partName" [(ngModel)]="partName"
+                                                    class="form-control" required
+                                                    [placeholder]="'Title (En)' | translate" [ngClass]="{'errorBorder': !form.controls.partName?.valid && isSubmitted,
+                                                'successBorder': form.controls.partName?.valid && isSubmitted}" />
+                                                <span class="help-block"
+                                                    *ngIf="!form.controls.partName?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Title (Ar)' | translate}}</label>
+                                                <input type="text" name="partName_ar" [(ngModel)]="partName_ar"
+                                                    class="form-control" required
+                                                    [placeholder]="'Title (Ar)' | translate" [ngClass]="{'errorBorder': !form.controls.partName_ar?.valid && isSubmitted,
+                                                'successBorder': form.controls.partName_ar?.valid && isSubmitted}" />
+                                                <span class="help-block"
+                                                    *ngIf="!form.controls.partName_ar?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Size' | translate}}</label>
+                                                <input type="number" step="0.01" min="0" name="size" [(ngModel)]="size"
+                                                    class="form-control" required [placeholder]="'Size' | translate"
+                                                    [ngClass]="{'errorBorder': (!form.controls.size?.valid || !checkValue(size))&& isSubmitted,
+                                                'successBorder': form.controls.size?.valid && isSubmitted}" />
+                                                <span class="help-block"
+                                                    *ngIf="!form.controls.size?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                                <span class="help-block" *ngIf="!checkValue(size) && isSubmitted">**
+                                                    {{'Value must be positive' | translate}}</span>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Weight' | translate}}</label>
+                                                <input type="number" step="0.01" min="0" name="wights"
+                                                    [(ngModel)]="wights" class="form-control" required
+                                                    [placeholder]="'Weight' | translate" [ngClass]="{'errorBorder': (!form.controls.wights?.valid || !checkValue(wights))&& isSubmitted,
+                                                'successBorder': form.controls.wights?.valid && isSubmitted}" />
+                                                <span class="help-block"
+                                                    *ngIf="!form.controls.wights?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                                <span class="help-block" *ngIf="!checkValue(wights) && isSubmitted">**
+                                                    {{'Value must be positive' | translate}}</span>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Price' | translate}}</label>
+                                                <input type="number" name="price" [(ngModel)]="price"
+                                                    class="form-control" required [placeholder]="'Price' | translate"
+                                                    [ngClass]="{'errorBorder': (!form.controls.price?.valid || !checkValue(price)) && isSubmitted,
+                                                'successBorder': form.controls.price?.valid && isSubmitted}" />
+                                                <span class="help-block"
+                                                    *ngIf="!form.controls.price?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                                <span class="help-block" *ngIf="!checkValue(price) && isSubmitted">**
+                                                    {{'Value must be positive' | translate}}</span>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Brand' | translate}}</label>
+                                                <ng-multiselect-dropdown
+                                                    [placeholder]="'-- Select Brands --' | translate"
+                                                    [settings]="dropdownSettings" [data]="brandList" [(ngModel)]="brand"
+                                                    name="brand">
+                                                </ng-multiselect-dropdown>
+                                                <span class="help-block" *ngIf="brand.length == 0 && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Category' | translate}}</label>
+                                                <!-- (change)="mainCategoryChange($event)" -->
+                                                <select name="mainCategory" [(ngModel)]="mainCategory"
+                                                    class="form-control" required [ngClass]="{'errorBorder': mainCategory == '0' && isSubmitted,
+                                                'successBorder': mainCategory != '0' && isSubmitted}">
+                                                    <option *ngFor="let item of mainCategoryList" [value]="item.id">
+                                                        {{item.value}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="mainCategory == '0' && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row m-0">
+      
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Sub Category' | translate}}</label>
+                                                <select name="subCategory" [(ngModel)]="subCategory"
+                                                    class="form-control">
+                                                    <option *ngFor="let item of subCategoryList" [value]="item.id">
+                                                        {{item.value}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="row m-0">
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Description 1 (en)' | translate}}</label>
+                                                <textarea type="text" name="longDescription"
+                                                    [(ngModel)]="longDescription" class="form-control"
+                                                    [placeholder]="'Description 1 (en)' | translate"></textarea>
+
+                                                <!-- [ngClass]="{'errorBorder': !form.controls.longDescription?.valid && isSubmitted,
+'successBorder': form.controls.longDescription?.valid && isSubmitted}" -->
+
+                                                <!-- <span class="help-block"
+                                                    *ngIf="!form.controls.longDescription?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Description 1 (ar)' | translate}}</label>
+                                                <textarea type="text" name="longDescriptionAr"
+                                                    [(ngModel)]="longDescriptionAr" class="form-control"
+                                                    [placeholder]="'Description 1 (ar)' | translate"></textarea>
+
+                                                <!-- [ngClass]="{'errorBorder': !form.controls.longDescriptionAr?.valid && isSubmitted,
+'successBorder': form.controls.longDescriptionAr?.valid && isSubmitted}" -->
+
+                                                <!-- <span class="help-block"
+                                                    *ngIf="!form.controls.longDescriptionAr?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0">
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Description 2 (en)' | translate}}</label>
+                                                <input type="text" name="shortDescription"
+                                                    [(ngModel)]="shortDescription" class="form-control"
+                                                    [placeholder]="'Description 2 (en)' | translate" />
+                                                <!-- [ngClass]="{'errorBorder': !form.controls.shortDescription?.valid && isSubmitted,
+ 'successBorder': form.controls.shortDescription?.valid && isSubmitted}" -->
+                                                <!-- <span class="help-block"
+                                                    *ngIf="!form.controls.shortDescription?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Description 2 (ar)' | translate}}</label>
+                                                <input type="text" name="shortDescriptionAr"
+                                                    [(ngModel)]="shortDescriptionAr" class="form-control"
+                                                    [placeholder]="'Description 2 (ar)' | translate" />
+
+                                                <!-- [ngClass]="{'errorBorder': !form.controls.shortDescriptionAr?.valid && isSubmitted,
+ 'successBorder': form.controls.shortDescriptionAr?.valid && isSubmitted}" -->
+
+                                                <!-- <span class="help-block"
+                                                    *ngIf="!form.controls.shortDescriptionAr?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-0">
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Quantity' | translate}}</label>
+                                                <input type="number" min="0" name="quantity" [(ngModel)]="quantity"
+                                                    class="form-control" required [placeholder]="'Quantity' | translate"
+                                                    [ngClass]="{'errorBorder': (!form.controls.quantity?.valid || !checkValue(quantity)) && isSubmitted,
+                                                'successBorder': form.controls.quantity?.valid && isSubmitted}" />
+                                                <span class="help-block"
+                                                    *ngIf="!form.controls.quantity?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                                <span class="help-block" *ngIf="!checkValue(quantity) && isSubmitted">**
+                                                    {{'Value must be positive' | translate}}</span>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Discount Price' | translate}}</label>
+                                                <input type="number" min="0" name="discountPrice"
+                                                    [(ngModel)]="discountPrice" class="form-control"
+                                                    [placeholder]="'Discount Price' | translate" />
+                                                <span class="help-block"
+                                                    *ngIf="discountPrice && price <= discountPrice && isSubmitted">**
+                                                    {{'Discount cannot be equal or bigger than the price' |
+                                                    translate}}</span>
+                                                <span class="help-block"
+                                                    *ngIf="discountPrice && !checkValue(discountPrice) && isSubmitted">**
+                                                    {{'Value must be positive' | translate}}</span>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Item type' | translate}}</label>
+                                                <select name="item_type" [(ngModel)]="item_type" class="form-control"
+                                                    required [ngClass]="{'errorBorder': item_type == '0' && isSubmitted,
+                                                'successBorder': item_type != '0' && isSubmitted}">
+                                                    <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                                                    <option *ngFor="let item of item_typeList" [value]="item.id">
+                                                        {{item.value}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="item_type == '0' && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3" style="    display: flex;
+                                            flex-direction: column;    margin-top: 3rem !important;">
+                                                <label>{{'Upload Image' | translate}}</label>
+                                                <app-uploader [image_url]="image_url" [isDisabled]="true"
+                                                    [isSubmitted]="isSubmitted" accept="image/*" [isTextAppear]="true"
+                                                    (selectFileEmiter)="selectFileEmiter($event)">
+                                                </app-uploader>
+                                                <!-- [isRequired]="true" -->
+                                                <!-- <app-multi-uploader [isTextAppear]="!isViewPage"
+                                                    [isSubmitted]="isSubmitted" [isRequired]="isCreatePage"
+                                                    accept="image/*" [image_url]="image_url" from_feature="categories"
+                                                    [isDisabled]="!isViewPage"
+                                                    (selectFileEmiter)="selectFileEmiter($event)"></app-multi-uploader> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="example-container mt-5">
+                                                <label class="invisible">xxx</label>
+                                                <label class="checkbox-container">
+                                                    <label class="special-float">{{'Is Special' | translate}}</label>
+                                                    <input type="checkbox" name="isSponsored"
+                                                        [(ngModel)]="isSponsored" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-3">
+                                            <div class="example-container mt-5">
+                                                <label class="invisible">xxx</label>
+                                                <label class="checkbox-container">
+                                                    <label class="special-float">{{'Is Deals' | translate}}</label>
+                                                    <input type="checkbox" name="isDeals" [(ngModel)]="isDeals" />
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3 search-keys">
+                                                <label class="bold">{{'Search Kyes' | translate}}</label>
+                                                <input type="text" name="searchKey" [(ngModel)]="searchKey"
+                                                    class="form-control custom-input"
+                                                    [placeholder]="'Search Kyes' | translate"
+                                                    (keyup.enter)="onEnter()" />
+                                                <span (click)="onEnter()">+</span>
+                                            </div>
+                                            <div class="row m-2 keys-container w-100">
+                                                <div class="key-box" *ngFor="let item of keyList;let i = index">
+                                                    <div class="position-relative image-ad">
+                                                        {{item.key}}
+                                                        <span style="right: -25px;" (click)="removeKey(i)"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Shop' | translate}}</label>
+                                                <select name="shop" [(ngModel)]="shop" class="form-control" required
+                                                    [ngClass]="{'errorBorder': shop == '0' && isSubmitted,
+                                                'successBorder': shop != '0' && isSubmitted}">
+                                                    <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                                                    <option *ngFor="let item of shopList" [value]="item.id">
+                                                        {{item.value}}</option>
+                                                </select>
+                                                <span class="help-block" *ngIf="shop == '0' && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div> -->
+
+                                        <!-- <div class="col-md-6">
+                                            <div class="example-container mt-3 search-keys compatability">
+                                                <label>{{'Reference ID#' | translate}}</label>
+                                                <div>
+                                                    <input type="text" name="reference_id" [(ngModel)]="reference_id"
+                                                        class="form-control" required
+                                                        [placeholder]="'Reference ID#' | translate" [ngClass]="{'errorBorder': !form.controls.reference_id?.valid && isSubmitted,
+                                                    'successBorder': form.controls.reference_id?.valid && isSubmitted}"
+                                                        (keyup.enter)="getCarCompatibility()" />
+                                                    <span (click)="getCarCompatibility()"><i
+                                                            class="fa fa-search"></i></span>
+                                                </div>
+                                                <span class="help-block"
+                                                    *ngIf="!form.controls.reference_id?.valid && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div> -->
+
+                                    </div>
+                                    <div class="row m-0 mt-4" style="    border: 1px solid #fe8693;
+                                    border-radius: 6px;    padding-bottom: 0.25rem;">
+                                        <div class="col-md-12 mb-4">
+                                            <div class="example-container mt-3" style="    display: flex;
+                                            flex-direction: column;">
+                                                <label style="font-weight: 600;">{{'Units' | translate}}</label>
+                                                <!-- {{units | json}} -->
+                                                <div class="row mb-2" *ngFor="let unit of units; let i = index">
+                                                    <div class="col-md-7">
+                                                        <div class="example-container mt-3">
+                                                            <label *ngIf="i == 0">{{'Unit' | translate}}</label>
+                                                            <select class="form-control" [name]="'unit-' + unit.id"
+                                                                [(ngModel)]="unit.id">
+                                                                <option *ngFor="let item of unitsList"
+                                                                    [value]="item.id">{{item.value}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="example-container mt-3">
+                                                            <label *ngIf="i == 0">{{'Price' | translate}}</label>
+                                                            <input type="number" class="form-control"
+                                                                [name]="'unitprice-' + unit.price"
+                                                                [(ngModel)]="unit.price"
+                                                                [placeholder]="'Price' | translate" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2"
+                                                        style="align-self: self-end;display: flex; gap: 0.5rem;">
+                                                        <button *ngIf="units.length == i + 1" (click)="addRow()"
+                                                            class="btn btn-success" style="width: 100%;"
+                                                            type="button">Add</button>
+                                                        <button *ngIf="units.length > 1" (click)="removeRow(i)"
+                                                            class="btn btn-success" style="width: 100%;"
+                                                            type="button">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 
+                                    <div class="row m-0">
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Bought Together Items' | translate}}</label>
+                                                <ng-multiselect-dropdown
+                                                    [placeholder]="'-- Select Bought Together Items --' | translate"
+                                                    [settings]="dropdownSettings" [data]="itemsListFreq"
+                                                    [(ngModel)]="fbw" name="fbw">
+                                                </ng-multiselect-dropdown>
+                                                <span class="help-block" *ngIf="fbw.length == 0 && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="example-container mt-3">
+                                                <label>{{'Bought Together Services' | translate}}</label>
+                                                <ng-multiselect-dropdown
+                                                    [placeholder]="'-- Select Bought Together Services --' | translate"
+                                                    [settings]="dropdownSettings" [data]="serviceListFreq"
+                                                    [(ngModel)]="servicesListSelected" name="servicesListSelected">
+                                                </ng-multiselect-dropdown>
+                                                <span class="help-block"
+                                                    *ngIf="servicesListSelected.length == 0 && isSubmitted"
+                                                    [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;
+                    margin-top: 1rem;">
+                        <div class="card-toolbar">
+                            <button *ngIf="isEditPage || isCreatePage" type="button" class="btn btn-success mr-2"
+                                [translate]="'SHARED.SAVE_CHANGES'" (click)="submitForm(form)"></button>
+                            <button *ngIf="isEditPage" type="button" (click)="cancelChanges()"
+                                class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                            <button type="button" (click)="backPage()" class="btn btn-light"
+                                [translate]="'SHARED.BACK'"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

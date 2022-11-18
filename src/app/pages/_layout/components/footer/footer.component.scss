@@ -1,0 +1,13 @@
+.copyright-logo{
+    width: 50px;
+    vertical-align: text-bottom;
+}
+@media only screen and (max-width: 991px) {
+  .copyright-logo{
+    padding-bottom: 6px;
+    vertical-align: sub;
+  }
+  a{
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,40 @@
+.font-weight-500{
+    font-weight: 500;
+}
+.capitalize{
+    text-transform: capitalize;
+}
+.lower-case{
+    text-transform: lowercase;
+}
+.upper-case{
+    text-transform: uppercase;
+}
+.mg-top{
+    margin-top: -1.5rem;
+}
+.pd-top-special{
+    padding-top: 33px;
+    & span{
+        color: #7E8299;
+    }
+}
+.mt--{
+    margin-top: -15px;
+}
+.cut-text{
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+@media only screen and (max-width: 768px) {
+    .pd-top-special{
+        padding-top: 0;
+        padding-bottom: 15px;
+    }
+}
+.w-70{
+    width: 70%;
+    text-align: right;
+}

@@ -1,0 +1,91 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label" *ngIf="isCreatePage">{{'Create Subscription' | translate}}</h3>
+                <h3 class="card-label" *ngIf="isEditPage">{{'Update Subscription' | translate}}</h3>
+            </div>
+            <div class="card-toolbar">
+                <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+            </div>
+        </div>
+        <div class="form">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Title' | translate}} (EN)</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="text" name="title" [(ngModel)]="title" class="form-control" required
+                                [ngClass]="{'errorBorder': !form.controls.title?.valid && isSubmitted,
+                        'successBorder': form.controls.title?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.title?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>    
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Title' | translate}} (AR)</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="text" name="title_ar" [(ngModel)]="title_ar" class="form-control" required
+                                [ngClass]="{'errorBorder': !form.controls.title?.valid && isSubmitted,
+                        'successBorder': form.controls.title_ar?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.title_ar?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>               
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Duration (Number of month)' | translate}}</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="number" name="duration" [(ngModel)]="duration" class="form-control" required
+                                [ngClass]="{'errorBorder': !form.controls.duration?.valid && isSubmitted,
+                        'successBorder': form.controls.duration?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.duration?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Price' | translate}}</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="number" min="0" name="price" [(ngModel)]="price" class="form-control" required
+                                [ngClass]="{'errorBorder': !form.controls.price?.valid && isSubmitted,
+                        'successBorder': form.controls.price?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.price?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Description' | translate}} (EN)</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <textarea name="description" [(ngModel)]="description" class="form-control" required
+                                [ngClass]="{'errorBorder': !form.controls.description?.valid && isSubmitted,
+                        'successBorder': form.controls.description?.valid && isSubmitted}"></textarea>
+                            <span class="help-block" *ngIf="!form.controls.description?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Description' | translate}} (AR)</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <textarea name="description_ar" [(ngModel)]="description_ar" class="form-control" required
+                                [ngClass]="{'errorBorder': !form.controls.description_ar?.valid && isSubmitted,
+                        'successBorder': form.controls.description_ar?.valid && isSubmitted}"></textarea>
+                            <span class="help-block" *ngIf="!form.controls.description_ar?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</form>

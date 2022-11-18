@@ -1,0 +1,69 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label">{{'Advertisement Requests' | translate}}</h3>
+            </div>
+            <div class="card-toolbar">
+                <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                <button type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary"
+                    [translate]="'SHARED.CANCEL'"></button>
+            </div>
+        </div>
+        <div class="form">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Location' | translate}}</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid"
+                        [ngClass]="{'errorBorder': (!form.controls.location?.valid || form.controls.location?.value == '0') && isSubmitted,
+                        'successBorder': form.controls.location?.valid && isSubmitted && form.controls.location?.value != '0'}"
+                        >
+                            <select name="location" [(ngModel)]="location" required class="form-control form-control-lg form-control-solid">
+                                <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                                <option *ngFor="let item of locationList" [value]="item.id">{{item.name}}</option>
+                            </select>
+                        </div>
+                        <span class="help-block" *ngIf="(!form.controls.location?.valid || form.controls.location?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Duration (Number of month)' | translate}}</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="number" name="duration" [(ngModel)]="duration" class="form-control" required
+                                [ngClass]="{'errorBorder': !form.controls.duration?.valid && isSubmitted,
+                        'successBorder': form.controls.duration?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.duration?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'Price' | translate}}</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="text" name="price" [(ngModel)]="price" class="form-control" required [ngClass]="{'errorBorder': !form.controls.price?.valid && isSubmitted,
+                        'successBorder': form.controls.price?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.price?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="example-container">
+                        <app-uploader
+                        [image_url]="image_url"
+                        [isDisabled]="true"
+                        [isRequired]="true"
+                        [isSubmitted]="isSubmitted"
+                        accept="image/*"
+                        [isTextAppear]="true"
+                        (selectFileEmiter)="selectFileEmiter($event)"
+                        ></app-uploader>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

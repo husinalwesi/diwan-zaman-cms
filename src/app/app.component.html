@@ -1,0 +1,10 @@
+<!-- <app-splash-screen></app-splash-screen> -->
+<router-outlet></router-outlet>
+<!-- <app-notification></app-notification> -->
+<div class="newOrders" [class.active]="showMessage" (click)="redirectToData()">
+    <p>{{messageText}}</p>
+</div>
+<audio #audio style="display: none;" preload="auto" src="assets/notification.mp3"></audio>
+<!-- <button type=""></button> -->
+<ng-image-fullscreen-view [images]="imageObject" imageIndex="0" [show]="showFlag" (close)="hideFullScreen()">
+</ng-image-fullscreen-view>

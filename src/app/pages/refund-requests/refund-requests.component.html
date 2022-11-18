@@ -1,0 +1,91 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Refund Requests' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                        <!-- [class.disabled]="totalResult >= 6" -->
+                        <!-- <a *ngIf="!isDeletedPage" routerLink="/category-create" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                            <i class="flaticon2-plus-1"></i>
+                            <span [translate]="'SHARED.CREATE'"></span>
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="row">
+                        <div class="col-md-1 mb-3">
+                            <label class="invisible">[INVISIBLE]</label>
+                            <span class="filterBy text-muted" [translate]="'SHARED.FILTER_BY'"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>{{'Customer Name' | translate}}</label>
+                                <input type="text" name="customerName" [(ngModel)]="customerName" class="form-control" [placeholder]="'Customer Name' | translate"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>{{'Part Name' | translate}}</label><br>
+                                <select name="partName" [ngModel]="partName" class="form-control">
+                                    <option *ngFor="let item of partNameList; let innerIndex = index" [value]="item.id">{{item.value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="invisible">[INVISIBLE]</label>
+                            <button class="btn btn-success btn-block" (click)="currentPage=1; getData()" [translate]="'SHARED.SUBMIT'"></button>
+                        </div>
+                    </div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'Customer Name' | translate}}</th>
+                                            <th>{{'Order Number' | translate}}</th>
+                                            <th>{{'Part Name' | translate}}</th>
+                                            <th>{{'Return Reason' | translate}}</th>
+                                            <th>{{'Purchase Date' | translate}}</th>
+                                            <th>{{'Refund Request Date' | translate}}</th>
+                                            <th>{{'Actions' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response; let i = index">
+                                            <td><a routerLink="/xxxxxx/{{iteration.customerName}}" [ngbTooltip]="iteration.customerName" class="capitalize" [innerHtml]="iteration.customerName"></a></td>
+                                            <td><a routerLink="/xxxxxx/{{iteration.orderNumber}}" [ngbTooltip]="iteration.orderNumber" class="capitalize" [innerHtml]="iteration.orderNumber"></a></td>
+                                            <td><span [ngbTooltip]="iteration.partName" class="capitalize" [innerHtml]="iteration.partName"></span></td>
+                                            <td><span [ngbTooltip]="iteration.returnReason" class="capitalize" [innerHtml]="iteration.returnReason"></span></td>
+                                            <td>
+                                                <input type="date" [value]="iteration.purchaseDate" [(ngModel)]="iteration.purchaseDate" class="form-control">
+                                            </td>
+                                            <td><span [ngbTooltip]="iteration.refundRequestDate" class="capitalize" [innerHtml]="iteration.refundRequestDate"></span></td>
+                                            <td>
+                                                <a (click)="approveItem(iteration.id)" class="action-box-delete approve" href="javascript:void(0);" [ngbTooltip]="'Approve' | translate"><i class="fa">✓</i></a>
+                                                <a (click)="rejectItem(iteration.id)" class="action-box-delete decline" href="javascript:void(0);" [ngbTooltip]="'Reject' | translate"><i class="fa">✕</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

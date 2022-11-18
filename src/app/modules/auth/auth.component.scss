@@ -1,0 +1,10 @@
+@import "../../../assets/sass/pages/login/login-1.scss";
+
+:host {
+  height: 100%;
+}
+.login-logo-aside{
+  background-image: url("../../../assets/media/logos/insuredoo-logo.png");
+  background-size: 40% auto !important;
+  background-position: 50% 30%;
+}

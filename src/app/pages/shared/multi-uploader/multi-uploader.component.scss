@@ -1,0 +1,17 @@
+.user-img{
+    width: 114px;
+    height: 114px;
+}
+.image-input{
+    left: 40px !important;
+    bottom: 15px !important ;
+    label{
+        padding: 20px;
+        i{
+            &::before{
+                font-size: 20px;
+            }
+        }
+        
+    }
+}

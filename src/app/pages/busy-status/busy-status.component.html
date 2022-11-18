@@ -1,0 +1,61 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header py-3">
+        <div class="card-title align-items-start flex-column">
+            <!--  -->
+            <h3 class="card-label font-weight-bolder text-dark" >{{'Busy Status' | translate}}</h3>
+            <!-- <h3 class="card-label font-weight-bolder text-dark" *ngIf="isEditPage" [translate]="'SHARED.UPDATE_ACCOUNT'"></h3> -->
+            <!-- <h3 class="card-label font-weight-bolder text-dark" *ngIf="isViewPage" [translate]="'SHARED.VIEW_ACCOUNT'"></h3> -->
+            <!--  -->
+            <!-- <span class="text-muted font-weight-bold font-size-sm mt-1" [translate]="'SHARED.PERSONAL_INFORMATION'"></span> -->
+        </div>
+        <div class="card-toolbar">
+            <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+            <button type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+            <!-- <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button> -->
+        </div>
+        </div>
+        <div class="form">
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Day' | translate}}</label>
+                <label class="col-xl-1 col-form-label">{{'From' | translate}}</label>
+                <div class="col-lg-3 col-xl-3">
+                    <div class="example-container">
+                        <input type="date" name="dayFrom" [(ngModel)]="dayFrom" class="form-control" required
+                        [ngClass]="{'errorBorder': !form.controls.dayFrom?.valid && isSubmitted,
+                        'successBorder': form.controls.dayFrom?.valid && isSubmitted}"
+                        />
+                        <span class="help-block" *ngIf="!form.controls.dayFrom?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <label class="col-xl-1 col-form-label">{{'To' | translate}}</label>
+                <div class="col-lg-3 col-xl-3">
+                    <div class="example-container">
+                        <input type="date" name="dayTo" [(ngModel)]="dayTo" class="form-control" required
+                        [ngClass]="{'errorBorder': !form.controls.dayTo?.valid && isSubmitted,
+                        'successBorder': form.controls.dayTo?.valid && isSubmitted}"
+                        />
+                        <span class="help-block" *ngIf="!form.controls.dayTo?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Status' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.status?.valid || form.controls.status?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.status?.valid && isSubmitted && form.controls.status?.value != '0'}"
+                    >
+                        <select name="status" [(ngModel)]="status" required class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of statusList" [value]="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.status?.valid || form.controls.status?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,105 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card card-custom example example-compact gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">{{'Contact Us' | translate}}</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <button [permission]="'website-content-edit'" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                        <button type="button" (click)="getData()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+                        <!-- <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="example-preview">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="example-container">
+                                        <label>{{'Phone Number' | translate}}</label>
+                                        <input type="text" name="phone" [(ngModel)]="phone" class="form-control" required
+                                        [placeholder]="'Phone Number' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.phone?.valid && isSubmitted,
+                                        'successBorder': form.controls.phone?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.phone?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="example-container">
+                                        <label>{{'Email' | translate}}</label>
+                                        <input type="email" email name="email" [(ngModel)]="email" class="form-control"
+                                        [placeholder]="'Email' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.email?.valid && isSubmitted,
+                                        'successBorder': form.controls.email?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.email?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 mb-3">
+                                    <div class="example-container">
+                                        <label>{{'Facebook' | translate}}</label>
+                                        <input type="text" name="facebook" [(ngModel)]="facebook" class="form-control"
+                                        [placeholder]="'Facebook' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.facebook?.valid && isSubmitted,
+                                        'successBorder': form.controls.facebook?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.facebook?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="example-container">
+                                        <label>{{'Instagram' | translate}}</label>
+                                        <input type="text" name="instagram" [(ngModel)]="instagram" class="form-control"
+                                        [placeholder]="'Instagram' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.instagram?.valid && isSubmitted,
+                                        'successBorder': form.controls.instagram?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.instagram?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="example-container">
+                                        <label>{{'Whatsapp' | translate}}</label>
+                                        <input type="text" name="whatsapp" [(ngModel)]="whatsapp" class="form-control"
+                                        [placeholder]="'Whatsapp' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.whatsapp?.valid && isSubmitted,
+                                        'successBorder': form.controls.whatsapp?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.whatsapp?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="example-container">
+                                        <label>{{'Youtube' | translate}}</label>
+                                        <input type="text" name="youtube" [(ngModel)]="youtube" class="form-control"
+                                        [placeholder]="'Youtube' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.youtube?.valid && isSubmitted,
+                                        'successBorder': form.controls.youtube?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.youtube?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="example-container">
+                                        <label>{{'Twitter' | translate}}</label>
+                                        <input type="text" name="twitter" [(ngModel)]="twitter" class="form-control"
+                                        [placeholder]="'Twitter' | translate"
+                                        [ngClass]="{'errorBorder': !form.controls.twitter?.valid && isSubmitted,
+                                        'successBorder': form.controls.twitter?.valid && isSubmitted}"
+                                        />
+                                        <span class="help-block" *ngIf="!form.controls.twitter?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

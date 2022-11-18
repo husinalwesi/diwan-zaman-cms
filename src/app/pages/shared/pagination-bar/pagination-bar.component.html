@@ -1,0 +1,25 @@
+<div class="datatable datatable-default col-12">
+    <div class="col-12 d-flex justify-content-center datatable-pager datatable-paging-loaded pt-0">
+        <ul class="datatable-pager-nav my-2 mb-sm-0" [class.reverse]="currentLang == 'ar'">
+            <li [class.inverse]="currentLang == 'ar'">
+                <a [ngbTooltip]="'SHARED.PREVIOUS' | translate" (click)="!isFirstPage(currentPage) ? changePage(currentPage-1,'prev') : null"
+                    class="datatable-pager-link datatable-pager-link-prev"
+                    [ngClass]="{'datatable-pager-link-disabled': isFirstPage(currentPage)}">
+                    <i class="flaticon2-back"></i>
+                </a>
+            </li>
+            <li *ngFor="let page of slicedPages">
+                <a class="datatable-pager-link datatable-pager-link-number"
+                    [ngClass]="{'btn btn-success text-white': page === +currentPage}"
+                    (click)="changePage(page)">{{page}}</a>
+            </li>
+            <li [class.inverse]="currentLang == 'ar'">
+                <a [ngbTooltip]="'SHARED.NEXT' | translate" class="datatable-pager-link datatable-pager-link-next "
+                    [ngClass]="{'datatable-pager-link-disabled': isLastPage(currentPage)}"
+                    (click)="!isLastPage(currentPage)  ? changePage(currentPage+1,'next') : null">
+                    <i class="flaticon2-next"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

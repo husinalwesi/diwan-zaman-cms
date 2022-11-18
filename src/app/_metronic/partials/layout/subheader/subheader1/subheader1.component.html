@@ -1,0 +1,9 @@
+<ul class="breadcrump-list" *ngIf="breadcrump?.length > 0">
+  <li *ngFor="let item of breadcrump; let i = index">
+    <a *ngIf="item?.link != '#'" [routerLink]="item?.link">
+      <span class="text-dark-50" [translate]="item?.title"></span>
+    </a>
+    <span *ngIf="item?.link == '#'" class="text-dark-50 m-0" [translate]="item?.title"></span>
+    <span *ngIf="(i + 1) < breadcrump?.length" class="text-dark-50">></span>
+  </li>
+</ul>

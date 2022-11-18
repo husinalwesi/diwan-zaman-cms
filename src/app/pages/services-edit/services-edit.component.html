@@ -1,0 +1,152 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header py-3">
+        <div class="card-title align-items-start flex-column">
+            <!--  -->
+            <h3 class="card-label font-weight-bolder text-dark">{{'Service Centre Information' | translate}}</h3>
+        </div>
+        <div class="card-toolbar">
+            <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+            <button type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+            <!-- <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button> -->
+        </div>
+        </div>
+        <div class="form">
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Service Name (En)' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.name_en?.valid || form.controls.name_en?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.name_en?.valid && isSubmitted && form.controls.name_en?.value != '0'}"
+                    >
+                    <input type="text" class="form-control form-control-lg form-control-solid" name="name_en" [(ngModel)]="name_en" required [placeholder]="'Service Name (En)' | translate" />
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.name_en?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Service Name (Ar)' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.name_ar?.valid || form.controls.name_ar?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.name_ar?.valid && isSubmitted && form.controls.name_ar?.value != '0'}"
+                    >
+                    <input type="text" class="form-control form-control-lg form-control-solid" name="name_ar" [(ngModel)]="name_ar" required [placeholder]="'Service Name (Ar)' | translate" />
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.name_ar?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Description (En)' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.description?.valid || form.controls.description?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.description?.valid && isSubmitted && form.controls.description?.value != '0'}"
+                    >
+                    <textarea class="form-control form-control-lg form-control-solid" name="description" [(ngModel)]="description" required [placeholder]="'Description (En)' | translate" ></textarea>
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.description?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Description (Ar)' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.description_ar?.valid || form.controls.description_ar?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.description_ar?.valid && isSubmitted && form.controls.description_ar?.value != '0'}"
+                    >
+                    <textarea class="form-control form-control-lg form-control-solid" name="description_ar" [(ngModel)]="description_ar" required [placeholder]="'Description (Ar)' | translate" ></textarea>
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.description_ar?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Price' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.price?.valid || form.controls.price?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.price?.valid && isSubmitted && form.controls.price?.value != '0'}"
+                    >
+                    <input type="number" min="0" step="0.01" class="form-control form-control-lg form-control-solid" name="price" [(ngModel)]="price" required [placeholder]="'Price' | translate" />
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.price?.valid || form.controls.price?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Estimated Hours' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.estimated_hours?.valid || form.controls.estimated_hours?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.estimated_hours?.valid && isSubmitted && form.controls.estimated_hours?.value != '0'}"
+                    >
+                    <input type="number" min="0" step="0.01" class="form-control form-control-lg form-control-solid" name="estimated_hours" [(ngModel)]="estimated_hours" required [placeholder]="'Estimated Hours' | translate" />
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.estimated_hours?.valid || form.controls.estimated_hours?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Category' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid">
+                        <!-- [ngClass]="{'errorBorder': (!form.controls.category?.valid || form.controls.category?.value == '0') && isSubmitted,
+                        'successBorder': form.controls.category?.valid && isSubmitted && form.controls.category?.value != '0'}"                         -->
+                        <select name="category" [(ngModel)]="category" class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of categoryList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <!-- <span class="help-block" *ngIf="(!form.controls.category?.valid || form.controls.category?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Type' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.typeSelect?.valid || form.controls.typeSelect?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.typeSelect?.valid && isSubmitted && form.controls.typeSelect?.value != '0'}"
+                    >
+                        <select name="typeSelect" [(ngModel)]="typeSelect" required class="form-control form-control-lg form-control-solid" (change)="onTypeChange()">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of typeSelectList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.typeSelect?.valid || form.controls.typeSelect?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Type ID' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.typeID?.valid || form.controls.typeID?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.typeID?.valid && isSubmitted && form.controls.typeID?.value != '0'}"
+                    >
+                        <select name="typeID" [(ngModel)]="typeID" required class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of typeIDList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.typeID?.valid || form.controls.typeID?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-5">
+                <div class="example-container">
+                    <app-uploader
+                    [image_url]="image_url"
+                    [isDisabled]="true"
+                    [isRequired]="isCreatePage"
+                    [isSubmitted]="isSubmitted"
+                    accept="image/*"
+                    [isTextAppear]="true"
+                    (selectFileEmiter)="selectFileEmiter($event)"
+                    ></app-uploader>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>

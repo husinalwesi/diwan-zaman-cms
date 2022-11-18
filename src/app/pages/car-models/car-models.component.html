@@ -1,0 +1,62 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label" [translate]="isDeletedPage ? 'Deleted Car Models' : 'Car Models'"></h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                        <!-- [class.disabled]="totalResult >= 6" -->
+                        <a [permission]="'car-models-create'" *ngIf="!isDeletedPage" routerLink="/car-model-create" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                            <i class="flaticon2-plus-1"></i>
+                            <span [translate]="'SHARED.CREATE'"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-cut-text">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'Name' | translate}}</th>
+                                            <th>{{'Brand' | translate}}</th>
+                                            <th class="w-20" [translate]="'SHARED.ACTION'"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response">
+                                            <td>
+                                                <span [ngbTooltip]="iteration.name" class="capitalize td-cut-text" [innerHtml]="iteration.name"></span>
+                                            </td>
+                                            <td>
+                                                <span [ngbTooltip]="iteration.brand" class="capitalize td-cut-text" [innerHtml]="iteration.brand"></span>
+                                            </td>
+                                            <td>
+                                                <a [permission]="'car-models-edit'" *ngIf="!isDeletedPage" class="action-box-edit" routerLink="/car-model-edit/{{iteration.id}}" [ngbTooltip]="'SHARED.EDIT' | translate"><i class="fa fa-edit"></i></a>
+                                                <a [permission]="'car-models-delete'" *ngIf="!isDeletedPage" (click)="deleteModel(iteration.id)" class="action-box-delete" href="javascript:void(0);" [ngbTooltip]="'SHARED.DELETE' | translate"><i class="fa fa-trash"></i></a>
+                                                <a *ngIf="isDeletedPage" class="action-box-delete" href="javascript:void(0);" (click)="unDelete(iteration.id)" [ngbTooltip]="'Restore' | translate"><i class="fa fa-undo"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

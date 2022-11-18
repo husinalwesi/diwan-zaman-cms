@@ -1,0 +1,71 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Refunds' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'Order ID#' | translate}}</th>
+                                            <th>{{'Order By' | translate}}</th>
+                                            <th>{{'Status' | translate}}</th>
+                                            <th>{{'Items' | translate}}</th>
+                                            <th>{{'Reason' | translate}}</th>
+                                            <th>{{'Action' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response; let i = index">
+                                            <td><span [ngbTooltip]="iteration.order_id" class="capitalize td-cut-text">
+                                                <a [routerLink]="'/orders/details/' + iteration.order_id">{{iteration.order_id}}</a>
+                                            </span></td>
+                                            <td><span [ngbTooltip]="iteration.order_by" class="capitalize td-cut-text">
+                                                <a [routerLink]="iteration.user_redirect">{{iteration.order_by}}</a>
+                                            </span></td>
+                                            <!-- <td><span [ngbTooltip]="iteration.order_by" class="capitalize td-cut-text">
+                                                {{iteration.order_by}}
+                                            </span></td> -->
+                                            <td>
+                                                <span [ngbTooltip]="iteration.status" class="capitalize status td-cut-text" [innerHtml]="iteration.status"
+                                                [class.decline-status] = "iteration.status == 'Declined'"
+                                                [class.pending-status] = "iteration.status == 'Pending'"
+                                                [class.success-status] = "iteration.status == 'Accepted'"
+                                                ></span>
+                                            </td>                                           
+                                            <td><span [ngbTooltip]="explodArr(iteration.items)" class="capitalize td-cut-text" [innerHtml]="explodArr(iteration.items)"></span></td>
+                                            <td><span [ngbTooltip]="iteration.reason" class="capitalize td-cut-text" [innerHtml]="iteration.reason"></span></td>
+                                            <td>
+                                                <a (click)="approve(iteration.id)" class="action-box-delete approve" href="javascript:void(0);" [ngbTooltip]="'Approve' | translate"><i class="fa">✓</i></a>
+                                                <a (click)="reject(iteration.id)" class="action-box-delete decline" href="javascript:void(0);" [ngbTooltip]="'Reject' | translate"><i class="fa">✕</i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

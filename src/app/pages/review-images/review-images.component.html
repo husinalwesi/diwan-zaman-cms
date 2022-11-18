@@ -1,0 +1,25 @@
+
+    <div class="card card-custom card-stretch">
+        <div class="card-header py-3">
+        <div class="card-title align-items-start flex-column">
+            <!--  -->
+            <h3 class="card-label font-weight-bolder text-dark">{{'Review Images' | translate}}</h3>
+        </div>
+        <div class="card-toolbar">
+            <!-- <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button> -->
+            <!-- <button type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button> -->
+            <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+        </div>
+        </div>
+
+        <div class="form">
+            <div class="card-body">
+                <div class="row" >
+                    <div class="col-md-3 mt-3" *ngFor="let item of imageList">
+                        <img viewFullImage [src]="item.image" class="img-fluid image">
+                    </div>
+                </div>
+                <app-table-empty *ngIf="!imageList?.length"></app-table-empty>
+            </div>
+        </div>
+    </div>

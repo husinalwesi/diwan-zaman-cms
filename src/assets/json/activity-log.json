@@ -1,0 +1,36 @@
+{
+    "statusCode": 200,
+    "message": "activity logs data",
+    "results": {
+        "page": null,
+        "per_page": 20,
+        "total": 2,
+        "data": [
+            {
+                "id": 2,
+                "log_name": "default",
+                "user": "Suha Hijawi",
+                "user_id": "ce836149-a148-48a0-ae97-79ba0a51a1f2",
+                "user_email": "donate@admin.com",
+                "user_type": "Admin",
+                "action": "updated ==> User",
+                "created_at": "23 hours ago"
+            },
+            {
+                "id": 3,
+                "log_name": "default",
+                "user": "Suha Hijawi",
+                "user_id": "ce836149-a148-48a0-ae97-79ba0a51a1f2",
+                "user_email": "donate@admin.com",
+                "user_type": "Admin",
+                "action": "created ==> Media",
+                "created_at": "22 hours ago"
+            }
+        ]
+    },
+    "dateTime": {
+        "date": "2020-12-23 14:55:23.478112",
+        "timezone_type": 3,
+        "timezone": "UTC"
+    }
+}

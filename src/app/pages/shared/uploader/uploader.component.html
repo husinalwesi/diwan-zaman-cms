@@ -1,0 +1,22 @@
+<div id="kt_profile_avatar" class="image-input image-input-outline"
+[ngClass]="{'errorBorder': isRequired && !image && isSubmitted,
+'successBorder': isRequired && image && isSubmitted}">
+    <div class="image-input-wrapper">
+        <img viewFullImage mat-card-image class="user-img m-0" [src]="image_url" [ngbTooltip]="'SHARED.CLICK_TO_ENLARGE_IMAGE' | translate" />
+    </div>
+    <label *ngIf="isDisabled" [ngbTooltip]="'SHARED.CLICK_TO_CHANGE_IMAGE' | translate" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar" class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+    [ngClass]="{'errorBorder': isRequired && !image && isSubmitted,
+    'successBorder': isRequired && image && isSubmitted}">
+        <i class="fa fa-pen icon-sm text-muted"></i>
+        <input type="file" id="file-change" (change)="selectFile($event)" onclick="this.value = null" name="image" [accept]="accept" [required]="isRequired" />
+    </label>
+</div>
+<span class="form-text text-muted" *ngIf="isTextAppear">
+    <span [translate]="'SHARED.ALLOWED_FILE_TYPES'"></span>
+    <span>{{replaceDots(accept)}}.</span>
+</span>
+<span class="form-text text-muted" *ngIf="isTextAppear">
+    <span [translate]="'SHARED.MAXUMIM_UPLOAD_FILE'"></span>
+    <span> {{maximumFileUpload}} <span [translate]="'SHARED.MB'"></span>.</span>
+</span>
+<span class="help-block" *ngIf="isRequired && !image && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>

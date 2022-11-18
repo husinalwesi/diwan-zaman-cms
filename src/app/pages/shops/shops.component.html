@@ -1,0 +1,95 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label" [translate]="isDeletedPage ? 'Deleted Shops' : 'Shops'"></h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                        <!-- [class.disabled]="totalResult >= 6" -->
+                        <a [permission]="'shops-create'" *ngIf="!isDeletedPage" routerLink="/shops-create" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                            <i class="flaticon2-plus-1"></i>
+                            <span [translate]="'SHARED.CREATE'"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-cut-text table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'Name' | translate}}</th>
+                                            <th>{{'Email' | translate}}</th>
+                                            <th>{{'Phone Number' | translate}}</th>
+                                            <th>{{'Subscription' | translate}}</th>
+
+                                            <th>{{'Subscription expiry date' | translate}}</th>
+                                            <th>{{'Paid/Unpaid' | translate}}</th>
+                                            
+                                            <!-- <th>{{'is sponsored' | translate}}</th> -->
+                                            <th>{{'Image' | translate}}</th>
+                                            <th class="w-20" [translate]="'SHARED.ACTION'"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response">
+                                            <td>
+                                                <span [ngbTooltip]="iteration.name" class="capitalize td-cut-text" [innerHtml]="iteration.name"></span>
+                                            </td>
+
+                                            <td>
+                                                <span [ngbTooltip]="iteration.email" class="capitalize td-cut-text" [innerHtml]="iteration.email"></span>
+                                            </td>
+                                            <td>
+                                                <span [ngbTooltip]="iteration.phone_number" class="capitalize td-cut-text" [innerHtml]="iteration.phone_number"></span>
+                                            </td>
+
+                                            <!-- <td>
+                                                <span class="capitalize td-cut-text">{{(iteration.is_sponsored == "1" ? "sponsored" : "not_sponsored") | translate}}</span>
+                                            </td> -->
+                                            <td>
+                                                <span class="capitalize td-cut-text">{{iteration.subscription}} {{'Month' | translate}}</span>
+                                            </td>
+
+                                            <td>
+                                                <span *ngIf="iteration.subscription_expiry_date" [ngbTooltip]="iteration.subscription_expiry_date | date:'full'" class="capitalize td-cut-text">{{iteration.subscription_expiry_date | date:'full'}}</span>
+                                                <span *ngIf="!iteration.subscription_expiry_date" class="capitalize td-cut-text">-</span>                                                
+                                            </td>
+                                            <td>
+                                                <span class="capitalize td-cut-text">
+                                                    <span *ngIf="iteration.paid_unpaid == '1'">{{'Paid' | translate}}</span>
+                                                    <span *ngIf="iteration.paid_unpaid == '0'">{{'Not Paid' | translate}}</span>                                                    
+                                                    <span *ngIf="iteration.paid_unpaid != '0' && iteration.paid_unpaid != '1'">{{iteration.paid_unpaid || '---'}}</span>                                                                                                        
+                                                </span>
+                                            </td>
+                                            
+                                            <td class="img-on-table"><img [src]="iteration.img" viewFullImage [ngbTooltip]="'SHARED.CLICK_TO_ENLARGE_IMAGE' | translate" /></td>
+                                            <td>
+                                                <a [permission]="'shops-edit'" *ngIf="!isDeletedPage" class="action-box-edit" routerLink="/shops-edit/{{iteration.id}}" [ngbTooltip]="'SHARED.EDIT' | translate"><i class="fa fa-edit"></i></a>
+                                                <a [permission]="'shops-delete'" *ngIf="!isDeletedPage" (click)="deleteShop(iteration.id)" class="action-box-delete" href="javascript:void(0);" [ngbTooltip]="'SHARED.DELETE' | translate"><i class="fa fa-trash"></i></a>
+                                                <a *ngIf="isDeletedPage" class="action-box-delete" href="javascript:void(0);" (click)="unDelete(iteration.id)" [ngbTooltip]="'Restore' | translate"><i class="fa fa-undo"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

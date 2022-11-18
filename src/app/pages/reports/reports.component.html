@@ -1,0 +1,67 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Reports' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'ID#' | translate}}</th>
+
+
+                                            <th>{{'Customer Name' | translate}}</th>
+                                            <th>{{'Email' | translate}}</th>
+                                            <th>{{'Phone Number' | translate}}</th>
+
+                                            <th>{{'Subject' | translate}}</th>
+                                            <th>{{'Details' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response; let i = index">
+
+                                            <!-- <td><span [ngbTooltip]="iteration.id" class="capitalize td-cut-text">
+                                                <a [routerLink]="'/orders/details/' + iteration.id">{{iteration.id}}</a>
+                                            </span></td> -->
+
+                                            <td><span [ngbTooltip]="iteration.id" class="capitalize td-cut-text">
+                                                {{iteration.id}}
+                                            </span></td>
+
+                                            <td><span [ngbTooltip]="iteration.customer_name" class="capitalize td-cut-text" [innerHtml]="iteration.customer_name"></span></td>
+                                            <td><span [ngbTooltip]="iteration.email" class="capitalize td-cut-text" [innerHtml]="iteration.email"></span></td>
+                                            <td><span [ngbTooltip]="iteration.phone_number" class="capitalize td-cut-text" [innerHtml]="iteration.phone_number"></span></td>                                            
+
+                                            <td><span [ngbTooltip]="iteration.subject" class="capitalize td-cut-text" [innerHtml]="iteration.subject"></span></td>
+                                            <td><span [ngbTooltip]="iteration.details" class="capitalize td-cut-text" [innerHtml]="iteration.details"></span></td>                                           
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<!--begin::Container-->
+<div [ngClass]="footerContainerCSSClasses"
+  class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+  <!--begin::Copyright-->
+  <!-- <div class="text-dark order-2 order-md-1">
+    <span class="text-muted font-weight-bold mr-2"><b [translate]="'SHARED.VERSION'"></b> {{appVersion}}</span>
+  </div> -->
+  <!--end::Copyright-->
+
+  <!-- <span>
+    <strong>Copyright &copy; {{currentYear}}
+      <a href="https://atomkit.com/">atomKit</a>.
+    </strong> All rights reserved.
+  </span> -->
+
+
+  <span>
+    <strong><span [translate]="'SHARED.COPYRIGHT'"></span> &copy; {{currentYear}}
+      Arleen agency
+      <!-- <a href="https://atomkit.com/"><img class="copyright-logo" src="./assets/media/logos/atomkitanimation.gif" alt="Atomkit Digital Agency" /></a>. -->
+    </strong> <span [translate]="'SHARED.ALL_RIGHTS_RESERVED'"></span>
+  </span>
+
+</div>
+<!--end::Container-->

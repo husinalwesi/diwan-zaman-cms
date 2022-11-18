@@ -1,0 +1,22 @@
+.table-with-image td {
+    padding-top: 20px;
+}
+.not-paid,
+.paid{
+    min-width: 100px;
+    color: white;
+    display: inline-block;
+    border-radius: 5px;
+}
+.not-paid{
+    background-color: #EE2D41;    
+}
+.paid{
+    background-color: #34a853;
+}
+.excel-btn,
+.excel-btn:hover,
+.excel-btn:focus{
+    background-color: #34a853 !important;
+    border-color: #34a853 !important;
+}

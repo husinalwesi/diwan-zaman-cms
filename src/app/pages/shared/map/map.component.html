@@ -1,0 +1,41 @@
+<div class="map">
+    <div class="form-group position-absolute auto-complete-search my-4 pt-0" *ngIf="!readOnly">
+        <input (keydown.enter)="$event.preventDefault()" [disabled]="readOnly"
+            [placeholder]="'SHARED.SEARCH_FOR_LOCATION' | translate" autocorrect="off" autocapitalize="off"
+            spellcheck="off" type="text" class="form-control w-75 mx-auto" #search />
+    </div>
+    <agm-map [latitude]="latitude" class="w-100" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom"
+        [disableDefaultUI]="disableDefaultUI">
+
+        <!-- <agm-marker [latitude]="lat" [markerDraggable]="true" (dragEnd)="centerChange($event)" [longitude]="lng">
+        </agm-marker> -->
+
+
+        <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="draggable && !readOnly"
+            (dragStart)="markerDrag($event)" (dragEnd)="markerDrag($event)">
+            <!-- (drag)="markerDrag($event)" -->
+            <!-- (dragEnd)="markerDrag($event)" -->
+            <!-- (dragStart)="markerDrag($event)" (drag)="markerDrag($event)" -->
+            <agm-info-window>
+                <strong *ngIf="!readOnly" [translate]="'SHARED.DRAG_DROP_MAP'"></strong>
+                <strong *ngIf="readOnly" [translate]="'SHARED.YOUR_LOCATION'"></strong>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>
+
+    <div class="row" *ngIf="showDetails">
+        <div class="col-md-12">
+            <div class="row m-0 map-details">
+                <div class="col-md-4 p-0 text-left">
+                    <span><b [translate]="'SHARED.ADDRESS'"></b>: {{address}}</span> <br />
+                </div>
+                <div class="col-md-4 p-0 text-center">
+                    <span><b [translate]="'SHARED.LATITUDE'"></b>: {{latitude}}</span> <br />
+                </div>
+                <div class="col-md-4 p-0 text-right">
+                    <span><b [translate]="'SHARED.LONGITUDE'"></b>: {{longitude}}</span> <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

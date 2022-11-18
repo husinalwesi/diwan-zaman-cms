@@ -1,0 +1,25 @@
+.approve i{
+    vertical-align: middle;
+    color: #2dcc70;
+}
+.decline i{
+    vertical-align: middle;
+    color: #ff6f7e;
+}
+.status{
+    width: fit-content;
+    margin: 0 auto;
+    padding: 2px 15px;
+    border-radius: 3px;
+    color: white;
+    min-width: 130px;
+}
+.decline-status{
+    background-color: #ff6f7e;
+}
+.pending-status{
+    background-color: orange;
+}
+.success-status{
+    background-color: #34a853;
+}

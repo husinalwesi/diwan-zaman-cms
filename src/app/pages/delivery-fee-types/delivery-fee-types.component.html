@@ -1,0 +1,59 @@
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b mb-0">
+            <div class="card-header">
+                <div class="card-title">
+                    <h3 class="card-label">{{'Delivery Fees Shop' | translate}}</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="example-tools justify-content-center">
+                        <a routerLink="/delivery-fee-types-create" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                            <i class="flaticon2-plus-1"></i>
+                            <span [translate]="'SHARED.CREATE'"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="example-preview p-0">
+                        <div class="example-container">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover m-0 text-center table-with-image">
+                                    <thead>
+                                        <tr>
+                                            <th>{{'ID#' | translate}}</th>
+                                            <th>{{'Type' | translate}}</th>
+                                            <th>{{'Fees' | translate}}</th>
+                                            <th>{{'Country' | translate}}</th>
+                                            <th [permission]="'delivery-fee-types-edit'">{{'Action' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let iteration of response; let i = index">
+                                            <td><span [ngbTooltip]="iteration.id" class="capitalize td-cut-text" [innerHtml]="iteration.id"></span></td>
+                                            <td><span [ngbTooltip]="iteration.type | removeUnderScore" class="capitalize td-cut-text" [innerHtml]="iteration.type | removeUnderScore"></span></td>
+                                            <td><span [ngbTooltip]="iteration.fees" class="capitalize td-cut-text" [innerHtml]="iteration.fees"></span></td>
+                                            <td><span [ngbTooltip]="iteration.country" class="capitalize td-cut-text" [innerHtml]="iteration.country"></span></td>
+                                            <td [permission]="'delivery-fee-types-edit'">
+                                                <a class="action-box-edit" routerLink="/delivery-fee-types-edit/{{iteration.id}}" [ngbTooltip]="'SHARED.EDIT' | translate"><i class="fa fa-edit"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <app-table-empty *ngIf="!totalResult"></app-table-empty>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-xl-12">
+        <app-pagination-bar *ngIf="totalResult" class="d-block mx-auto my-2" [pages]="pages" [currentPage]="currentPage"
+        (selectPage)="selectPage($event)">
+        </app-pagination-bar>
+    </div>
+</div>

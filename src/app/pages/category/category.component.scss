@@ -1,0 +1,65 @@
+.w-20{
+    width: 175px;
+}
+.filterBy{
+    display: inline-block;
+    padding-top: 9px;
+}
+.mainCategory{
+    width: fit-content;
+    margin: 0 auto;
+    padding: 2px 15px;
+    background-color: #ff6f7e;
+    border-radius: 3px;
+    color: white;
+    min-width: 130px;
+}
+.subCategory{
+    width: fit-content;
+    margin: 0 auto;
+    padding: 2px 15px;
+    background-color: #3f4254;
+    border-radius: 3px;
+    color: white;
+    min-width: 130px;
+}
+@media (max-width: 575.98px){
+    table{
+        width: 650px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.drag-wrapper {
+  padding: 4px 0;
+}
+
+.drag-wrapper.dragging {
+  opacity: 0.5;
+}
+
+.card {
+  // border: 1px solid black;
+  padding: 1rem;
+}
+// .card-custom2{
+//   // border: 1px solid #9a9b9d;
+// }
+
+.card-custom2:hover{
+  border: 1px dashed #9a9b9d;
+  cursor: move;
+}

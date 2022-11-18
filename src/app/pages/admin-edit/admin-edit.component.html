@@ -1,0 +1,106 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header py-3">
+        <div class="card-title align-items-start flex-column">
+            <!--  -->
+            <h3 class="card-label font-weight-bolder text-dark" *ngIf="isCreatePage" [translate]="'SHARED.CREATE_ACCOUNT'"></h3>
+            <h3 class="card-label font-weight-bolder text-dark" *ngIf="isEditPage" [translate]="'SHARED.UPDATE_ACCOUNT'"></h3>
+            <h3 class="card-label font-weight-bolder text-dark" *ngIf="isViewPage" [translate]="'SHARED.VIEW_ACCOUNT'"></h3>
+            <!--  -->
+            <span class="text-muted font-weight-bold font-size-sm mt-1" [translate]="'SHARED.PERSONAL_INFORMATION'"></span>
+        </div>
+        <div class="card-toolbar">
+            <button *ngIf="isEditPage || isCreatePage" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+            <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+            <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+        </div>
+        </div>
+        <div class="form">
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Name' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': !form.controls.name?.valid && isSubmitted && isCreatePage,
+                    'successBorder': form.controls.name?.valid && isSubmitted && isCreatePage}"
+                    >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        <input minlength="3" [disabled]="isViewPage" type="text" name="name" [(ngModel)]="name" required class="form-control form-control-lg form-control-solid" [placeholder]="'Name'| translate"/>
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.name?.valid && isSubmitted && isCreatePage" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label" [translate]="'SHARED.EMAIL'"></label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': !form.controls.email?.valid && isSubmitted && isCreatePage,
+                    'successBorder': form.controls.email?.valid && isSubmitted && isCreatePage}"
+                    >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-at"></i>
+                            </span>
+                        </div>
+                        <input [disabled]="isViewPage" type="email" email name="email" [(ngModel)]="email" required class="form-control form-control-lg form-control-solid" [placeholder]="'SHARED.EMAIL' | translate"/>
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.email?.valid && isSubmitted && isCreatePage" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Password' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': !form.controls.password?.valid && isSubmitted && isCreatePage,
+                    'successBorder': form.controls.password?.valid && isSubmitted && isCreatePage}"
+                    >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-eye-slash"></i>
+                            </span>
+                        </div>
+                        <input [disabled]="isViewPage" type="password" name="password" [(ngModel)]="password" required class="form-control form-control-lg form-control-solid" placeholder="******" />
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.password?.valid && isSubmitted && isCreatePage" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Phone Number' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': !form.controls.phone_number?.valid && isSubmitted && isCreatePage,
+                    'successBorder': form.controls.phone_number?.valid && isSubmitted && isCreatePage}"
+                    >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-phone"></i>
+                            </span>
+                        </div>
+                        <input minlength="10" maxlength="13" [disabled]="isViewPage" type="text" name="phone_number" [(ngModel)]="phone_number" required class="form-control form-control-lg form-control-solid" [placeholder]="'Phone Number' | translate" />
+                    </div>
+                    <span class="help-block" *ngIf="!form.controls.phone_number?.valid && isSubmitted && isCreatePage" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label" [translate]="'SHARED.ROLE'"></label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.role?.valid || form.controls.role?.value == '0') && isSubmitted && isCreatePage,
+                    'successBorder': form.controls.role?.valid && isSubmitted && isCreatePage && form.controls.role?.value != '0'}"
+                    >
+                        <select [disabled]="isViewPage" name="role" [(ngModel)]="role" required class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of formattedResponseRolesList" [value]="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.role?.valid || form.controls.role?.value == '0') && isSubmitted && isCreatePage" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>

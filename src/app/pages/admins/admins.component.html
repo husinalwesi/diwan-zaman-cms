@@ -1,0 +1,114 @@
+<div class="row" *ngIf="!isDeletedPage">
+    <div class="col-xl-12">
+        <div class="card card-custom example example-compact gutter-b">
+            <div class="card-header">
+              <div class="card-title">
+                  <h3 class="card-label" [translate]="'SHARED.ADVANCE_SEARCH'"></h3>
+              </div>
+              <div class="card-toolbar">
+                  <div class="example-tools justify-content-center">
+                      <a [permission]="'admins-create'" *ngIf="!isDeletedPage" routerLink="/admin-create" class="example-copy toolbar-button btn btn-warning ml-2 mr-2">
+                          <i class="flaticon2-plus-1"></i>
+                          <span [translate]="'SHARED.CREATE'"></span>
+                      </a>
+                      <span type="button" [ngbTooltip]="'SHARED.TOGGLE' | translate" (click)="isToggle = !isToggle" class="example-copy toolbar-button btn btn-default font-weight-500" [innerHtml]="isToggle ? '-' : '+'"></span>
+                  </div>
+              </div>
+          </div>
+          <div class="card-body" *ngIf="isToggle">
+            <form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+                <div class="row">
+                    <div class="col-md-1 pd-top-special">
+                        <span class="text-muted" [translate]="'SHARED.FILTER_BY'"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label [translate]="'SHARED.SEARCH'"></label>
+                            <input type="text" name="search" [(ngModel)]="search" class="form-control" [placeholder]="'SHARED.SEARCH' | translate"/>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-3">
+                      <div class="form-group">
+                          <label>{{'User Type' | translate}}</label>
+                          <select name="userType" [(ngModel)]="userType" required class="form-control form-control-lg form-control-solid">
+                            <option *ngFor="let item of userTypeList" [value]="item.id">{{item.name}}</option>
+                          </select>
+                      </div>
+                  </div> -->
+                    <div class="col-md-2">
+                      <label class="invisible">[INVISIBLE]</label>
+                      <button type="submit" class="btn btn-block btn-success" [translate]="'SHARED.SUBMIT'"></button>
+                    </div>
+                </div>
+              </form>
+        </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+      <app-table-empty *ngIf="!isThereData"></app-table-empty>
+      <div class="col-md-4 mb-7" *ngFor="let iteration of response">
+          <div class="card card-custom card-stretch">
+              <div class="card-body pt-4">
+                <div class="d-flex justify-content-end">
+                  <div class="dropdown dropdown-inline" ngbDropdown>
+                    <a [ngbTooltip]="'SHARED.MORE' | translate" class="btn btn-clean btn-hover-light-primary btn-sm btn-icon cursor-pointer" ngbDropdownToggle>
+                      <i class="ki ki-bold-more-hor"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                      <ul class="navi navi-hover py-5">                      
+                          <li [permission]="'admins-edit'" class="navi-item" *ngIf="!isDeletedPage">
+                            <a class="navi-link cursor-pointer" routerLink="/admin-edit/{{iteration.id}}">
+                              <span class="navi-icon"><i class="flaticon-edit"></i></span>
+                              <span class="navi-text" [translate]="'SHARED.EDIT'"></span>
+                            </a>
+                          </li>
+                          <li [permission]="'admins-delete'" class="navi-item" *ngIf="!isDeletedPage">
+                            <a class="navi-link cursor-pointer" (click)="deleteUser(iteration.id)">
+                              <span class="navi-icon"><i class="flaticon-delete"></i></span>
+                              <span class="navi-text" [translate]="'SHARED.DELETE'"></span>
+                            </a>
+                          </li>
+                          <li class="navi-item" *ngIf="isDeletedPage">
+                            <a class="navi-link cursor-pointer" (click)="restoreUser(iteration.id)">
+                              <span class="navi-icon"><i class="fa fa-undo"></i></span>
+                              <span class="navi-text">Restore</span>
+                            </a>
+                          </li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-5">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="font-weight-bold mr-2">{{'Name' | translate}}</span>
+                    <span class="text-muted">{{iteration.name}}</span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-2 email-half">
+                    <span class="font-weight-bold mr-2" [translate]="'SHARED.EMAIL_SMALL'"></span>
+                    <a class="cutText w-70 text-muted text-hover-primary lower-case" [ngbTooltip]="iteration.email">{{iteration.email}}</a>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="font-weight-bold mr-2">{{'Phone Number' | translate}}</span>
+                    <span class="text-muted">{{iteration.phone_number}}</span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="font-weight-bold mr-2" [translate]="'SHARED.ROLE'"></span>
+                    <span class="text-muted">{{iteration.role}}</span>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="font-weight-bold mr-2">{{'Created At' | translate}}</span>
+                    <span class="text-muted">{{iteration.created_at}}</span>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb-7 mt--">
+      <app-pagination-bar *ngIf="isThereData" class="mx-auto mb-5 mg-top" [pages]="pages" [currentPage]="currentPage"
+      (selectPage)="selectPage($event)">
+      </app-pagination-bar>
+    </div>
+  </div>

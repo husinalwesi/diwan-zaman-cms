@@ -1,0 +1,9 @@
+.persantage{
+    font-size: 25px;
+}
+
+.errorBorder,
+.errorBorder:focus{
+    border: 1px solid red !important;
+    outline: unset !important;
+}

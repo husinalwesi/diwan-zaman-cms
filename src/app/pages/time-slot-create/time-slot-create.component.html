@@ -1,0 +1,93 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header py-3">
+        <div class="card-title align-items-start flex-column">
+            <!--  -->
+            <h3 class="card-label font-weight-bolder text-dark">{{'Time Slot Information' | translate}}</h3>
+        </div>
+        <div class="card-toolbar">
+            <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+            <!-- <button type="button" routerLink="/dealership-centre-edit/{{id}}" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button> -->
+            <button type="button" routerLink="/{{redirectRoute}}/{{id}}" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+        </div>
+        </div>
+        <div class="form">
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Day' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    
+                    >
+                        <select name="day" [(ngModel)]="day" required class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of dayList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <!-- <span class="help-block" *ngIf="(!form.controls.day?.valid || form.controls.day?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'From' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.from?.valid || form.controls.from?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.from?.valid && isSubmitted && form.controls.from?.value != '0'}"
+                    >
+                        <select name="from" [(ngModel)]="from" required class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of timeList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.from?.valid || form.controls.from?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'To' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': ((!form.controls.to?.valid || form.controls.to?.value == '0') || !checkValidationTime(form)) && isSubmitted,
+                    'successBorder': form.controls.to?.valid && isSubmitted && form.controls.to?.value != '0'}"
+                    >
+                        <select name="to" [(ngModel)]="to" required class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of timeList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.to?.valid || form.controls.to?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    <span class="help-block" *ngIf="!checkValidationTime(form) && isSubmitted">{{'Time to' | translate}} {{form.controls.to?.value}} {{'less time from' | translate}} {{form.controls.from?.value}}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'Status' | translate}}</label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.status?.valid || form.controls.status?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.status?.valid && isSubmitted && form.controls.status?.value != '0'}"
+                    >
+                        <select name="status" [(ngModel)]="status" required class="form-control form-control-lg form-control-solid">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of statusList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.status?.valid || form.controls.status?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Date' | translate}}</label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <input type="date" name="date" [min]="now" [(ngModel)]="date" class="form-control"
+                        />
+                        <!-- [placeholder]="'date' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.date?.valid && isSubmitted,
+                        'successBorder': form.controls.date?.valid && isSubmitted}" -->
+                        <!-- <span class="help-block" *ngIf="!form.controls.date?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>

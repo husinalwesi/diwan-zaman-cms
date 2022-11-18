@@ -1,0 +1,28 @@
+.color-gray{
+    color: #C0C9CC;
+}
+.box{
+    background-color: #f78693;
+    position: relative;
+    padding: 10px 15px;
+    color: white;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    .number{
+        font-size: 27px;
+        margin-bottom: 0px !important;
+    }
+    .title{
+        font-size: 15px;
+    }
+    .icon{
+        i{
+            font-size: 60px;
+            position: absolute;
+            top: 45px;
+            color: #FFFFFF;
+            opacity: 0.1;
+            left: 0;
+        }
+    }
+}

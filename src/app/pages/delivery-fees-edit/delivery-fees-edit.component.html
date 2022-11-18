@@ -1,0 +1,58 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label" *ngIf="isCreatePage">{{'Create Delivery' | translate}}</h3>
+                <h3 class="card-label" *ngIf="isEditPage">{{'Update Delivery' | translate}}</h3>
+            </div>
+            <div class="card-toolbar">
+                <button type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+                <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary"
+                    [translate]="'SHARED.CANCEL'"></button>
+                <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+            </div>
+        </div>
+        <div class="form">
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">{{'City' | translate}}</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="text" name="city" [(ngModel)]="city" class="form-control" required [ngClass]="{'errorBorder': !form.controls.city?.valid && isSubmitted,
+                        'successBorder': form.controls.city?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.city?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Delivery</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="example-container">
+                            <input type="number" min="0" name="delivery" [(ngModel)]="delivery" class="form-control"
+                                required [ngClass]="{'errorBorder': !form.controls.delivery?.valid && isSubmitted,
+                        'successBorder': form.controls.delivery?.valid && isSubmitted}" />
+                            <span class="help-block" *ngIf="!form.controls.delivery?.valid && isSubmitted"
+                                [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="form-group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Shop</label>
+                    <div class="col-lg-9 col-xl-6">
+                        <div class="input-group input-group-lg input-group-solid"
+                        [ngClass]="{'errorBorder': (!form.controls.shop?.valid || form.controls.shop?.value == '0') && isSubmitted,
+                        'successBorder': form.controls.shop?.valid && isSubmitted && form.controls.shop?.value != '0'}"
+                        >
+                            <select name="shop" [(ngModel)]="shop" required class="form-control form-control-lg form-control-solid">
+                                <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                                <option *ngFor="let item of shopList" [value]="item.id">{{item.value}}</option>
+                            </select>
+                        </div>
+                        <span class="help-block" *ngIf="(!form.controls.shop?.valid || form.controls.shop?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</form>

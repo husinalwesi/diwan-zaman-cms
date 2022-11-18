@@ -1,0 +1,279 @@
+<form #form="ngForm" novalidate (ngSubmit)="submitForm(form)">
+    <div class="card card-custom card-stretch">
+        <div class="card-header py-3">
+        <div class="card-title align-items-start flex-column" style="justify-content: center;">
+            <h3 class="card-label font-weight-bolder text-dark">{{'Dealership Centre' | translate}}</h3>
+        </div>
+        <div class="card-toolbar">
+            <button *ngIf="!isViewPage" type="submit" class="btn btn-success mr-2" [translate]="'SHARED.SAVE_CHANGES'"></button>
+            <button *ngIf="isEditPage" type="button" (click)="cancelChanges()" class="mr-2 btn btn-secondary" [translate]="'SHARED.CANCEL'"></button>
+            <button type="button" (click)="backPage()" class="btn btn-light" [translate]="'SHARED.BACK'"></button>
+        </div>
+        </div>
+        <div class="form">
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Dealership (En)' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <input type="text" name="dealership" [(ngModel)]="dealership" class="form-control" required
+                        [disabled]="isViewPage"
+                        [placeholder]="'Dealership (En)' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.dealership?.valid && isSubmitted,
+                        'successBorder': form.controls.dealership?.valid && isSubmitted}"
+                        />
+                        <span class="help-block" *ngIf="!form.controls.dealership?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Dealership (Ar)' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <input type="text" name="dealership_ar" [(ngModel)]="dealership_ar" class="form-control" required
+                        [disabled]="isViewPage"
+                        [placeholder]="'Dealership (Ar)' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.dealership_ar?.valid && isSubmitted,
+                        'successBorder': form.controls.dealership_ar?.valid && isSubmitted}"
+                        />
+                        <span class="help-block" *ngIf="!form.controls.dealership_ar?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Hourly rate (Price/H)' | translate}} <sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <input type="number" name="hourlyRate" [(ngModel)]="hourlyRate" class="form-control" required
+                        [disabled]="isViewPage"
+                        [placeholder]="'Hourly Rate' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.hourlyRate?.valid && isSubmitted,
+                        'successBorder': form.controls.hourlyRate?.valid && isSubmitted}"
+                        />
+                        <span class="help-block" *ngIf="!form.controls.hourlyRate?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2" class="persantage">\H</div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Description (En)' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <textarea name="description" [(ngModel)]="description" class="form-control" required
+                        [disabled]="isViewPage"
+                        [placeholder]="'Description (En)' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.description?.valid && isSubmitted,
+                        'successBorder': form.controls.description?.valid && isSubmitted}"
+                        ></textarea>
+                        <span class="help-block" *ngIf="!form.controls.description?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Description (Ar)' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <textarea name="description_ar" [(ngModel)]="description_ar" class="form-control" required
+                        [disabled]="isViewPage"
+                        [placeholder]="'Description (En)' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.description_ar?.valid && isSubmitted,
+                        'successBorder': form.controls.description_ar?.valid && isSubmitted}"
+                        ></textarea>
+                        <span class="help-block" *ngIf="!form.controls.description_ar?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div>
+
+
+            <!-- <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Brand' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <select name="brand" [(ngModel)]="brand" class="form-control" required
+                        [ngClass]="{'errorBorder': brand == '0' && isSubmitted,
+                        'successBorder': brand != '0' && isSubmitted}">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of brandList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="brand == '0' && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div> -->
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Brand' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <ng-multiselect-dropdown [placeholder]="'-- Select Brand --' | translate"
+                    [disabled]="isViewPage"
+                    [settings]="dropdownSettings" [data]="brandList"
+                    [(ngModel)]="brand" name="brand">
+                    </ng-multiselect-dropdown>
+                    <span class="help-block" *ngIf="brand.length == 0 && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div> 
+            </div>
+
+
+
+
+
+            <!-- <div class="form-group row"> -->
+                <!-- <label class="col-3 col-xl-3 col-lg-3 col-form-label">Services<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <select name="services" [(ngModel)]="services" class="form-control" required
+                        [ngClass]="{'errorBorder': services == '0' && isSubmitted,
+                        'successBorder': services != '0' && isSubmitted}">
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of servicesList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="services == '0' && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div> -->
+                <!-- <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Services' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <ng-multiselect-dropdown [placeholder]="'-- Select Services --' | translate"
+                    [settings]="dropdownSettings" [data]="servicesList"
+                    [(ngModel)]="services" name="services">
+                    </ng-multiselect-dropdown>
+                    <span class="help-block" *ngIf="services.length == 0 && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>  -->
+            <!-- </div> -->
+            <!-- <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label"></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <button class="btn btn-danger mr-2">Save</button>
+                        <button class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div> -->
+            <app-bitwise (bitWiseEmiter)="bitWiseEmiter($event)" [isViewPage]="isViewPage" [totalBitWise]="totalBitWise"></app-bitwise>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'From' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': (!form.controls.from?.valid || form.controls.from?.value == '0') && isSubmitted,
+                    'successBorder': form.controls.from?.valid && isSubmitted && form.controls.from?.value != '0'}"
+                    >
+                        <select name="from" [(ngModel)]="from" required class="form-control form-control-lg form-control-solid"
+                        [disabled]="isViewPage"
+                        >
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of timeList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.from?.valid || form.controls.from?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-3 col-lg-3 col-form-label">{{'To' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-lg-9 col-xl-6">
+                    <div class="input-group input-group-lg input-group-solid"
+                    [ngClass]="{'errorBorder': ((!form.controls.to?.valid || form.controls.to?.value == '0') || !checkValidationTime(form)) && isSubmitted,
+                    'successBorder': form.controls.to?.valid && isSubmitted && form.controls.to?.value != '0'}"
+                    >
+                        <select name="to" [(ngModel)]="to" required class="form-control form-control-lg form-control-solid"
+                        
+                        [disabled]="isViewPage"
+                        >
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of timeList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <span class="help-block" *ngIf="(!form.controls.to?.valid || form.controls.to?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    <span class="help-block" *ngIf="!checkValidationTime(form) && isSubmitted">{{'Time to' | translate}} {{form.controls.to?.value}} {{'less time from' | translate}} {{form.controls.from?.value}}</span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3 col-xl-3 col-lg-3 col-form-label">{{'Estimated Time' | translate}}<sup class="required"> *</sup></label>
+                <div class="col-7 col-lg-7 col-xl-6">
+                    <div class="example-container">
+                        <input type="number" name="estimatedTime" [(ngModel)]="estimatedTime" class="form-control" required
+                        [disabled]="isViewPage"
+                        [placeholder]="'Estimated Time' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.estimatedTime?.valid && isSubmitted,
+                        'successBorder': form.controls.estimatedTime?.valid && isSubmitted}"
+                        />
+                        <span class="help-block" *ngIf="!form.controls.estimatedTime?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-2 col-lg-2 col-xl-2"></div>
+            </div>
+            <div class="col-md-12 mt-5 mb-5">
+                <div class="example-container">
+                    <label>{{'Location' | translate}}</label>
+                    <app-map [latitude]="latitude" [longitude]="longitude" [readOnly]="isViewPage" [showDetails]="false" [draggable]="true" (changeLocationEmiter)="changeLocationEmiter($event)"></app-map>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-6 mt-2">
+                    <div class="example-container">
+                        <label>{{'Email' | translate}}</label>
+                        <input type="email" email name="email" [(ngModel)]="email" class="form-control" required
+                        [disabled]="isViewPage"
+                        [placeholder]="'Email' | translate"
+                        [ngClass]="{'errorBorder': !form.controls.email?.valid && isSubmitted,
+                        'successBorder': form.controls.email?.valid && isSubmitted}"
+                        />
+                        <span class="help-block" *ngIf="!form.controls.email?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <div class="example-container">
+                        <label>{{'Subscription' | translate}}</label>
+                        <select name="Subscription_id" [(ngModel)]="Subscription_id" required class="form-control"
+                        [disabled]="isViewPage"
+                        [ngClass]="{'errorBorder': (!form.controls.Subscription_id?.valid || form.controls.Subscription_id?.value == '0') && isSubmitted,
+                        'successBorder': form.controls.Subscription_id?.valid && isSubmitted && form.controls.Subscription_id?.value != '0'}"
+                        >
+                            <option value="0" [translate]="'SHARED.CHOOSE_ONE'"></option>
+                            <option *ngFor="let item of SubscriptionList" [value]="item.id">{{item.value}}</option>
+                        </select>
+                        <span class="help-block" *ngIf="(!form.controls.Subscription_id?.valid || form.controls.Subscription_id?.value == '0') && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <div class="example-container">
+                        <label>{{'Secondary Email' | translate}}</label>
+                        <input type="email" email name="secondary_email" [(ngModel)]="secondary_email" class="form-control"
+                        [disabled]="isViewPage"
+                        [placeholder]="'Secondary Email' | translate"
+                        />
+                        <!-- <span class="help-block" *ngIf="!form.controls.email?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                    </div>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <div class="example-container">
+                        <label>{{'Secondary Phone Number' | translate}}</label>
+                        <input type="text" name="secondary_phone_number" [(ngModel)]="secondary_phone_number" class="form-control"
+                        [disabled]="isViewPage"
+                        [placeholder]="'Secondary Phone Number' | translate"
+                        />
+                        <!-- <span class="help-block" *ngIf="!form.controls.phone_number?.valid && isSubmitted" [translate]="'SHARED.THIS_FIELD_IS_REQUIRED'"></span> -->
+                    </div>
+                </div>          
+                <div class="col-md-6 mt-2">
+                    <div class="example-container">
+                        <label class="d-block invisible">[INVISABLE]</label>
+                        <label class="checkbox-container special-check mt-3">
+                            <label class="special-float">{{'is sponsored' | translate}}</label>
+                            <input type="checkbox" name="is_sponsored" [(ngModel)]="is_sponsored" [disabled]="isViewPage" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                </div>       
+            </div>     
+        </div>
+        </div>
+    </div>
+</form>
+<br>
+<app-time-slot *ngIf="!isCreatePage" [response]="slots" [id]="id" [type]="'Dealership'" [isViewPage]="isViewPage"></app-time-slot>
